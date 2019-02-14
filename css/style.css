@@ -87,7 +87,16 @@ p {
 
 /* ---- section ---- */
 
-.game-screen {
+/*.game-screen {
     width: 100%;
     height: 100vh;
+}*/
+
+.game-screen {
+    width: 375px;
+    height: 670px;
+}
+
+canvas {
+ border : 1px solid red;
 }

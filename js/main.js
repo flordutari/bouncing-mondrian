@@ -27,7 +27,7 @@ const main = () => {
             
         `);
 
-        setInterval(buildGameOver, 3000);
+        setInterval(buildGameOver, 3000000);
 
         const width = document.querySelector('.game-screen').offsetWidth;
         const height = document.querySelector('.game-screen').offsetHeight;
@@ -50,14 +50,14 @@ const main = () => {
             };
         };
 
-        document.addEventListener('keydown', setPlayerDirection);
+        document.addEventListener('click', setPlayerDirection);
 
     };
 
     const buildGameOver = () => {
         const gameOverScreen = buildDom(`
             <section class="game-over">
-                <h1>Game Over Screen</h1>
+                <h1>Game Over</h1>
                 <button>Restart</button>
             </section>
         `);
