@@ -5,7 +5,7 @@ class Game{
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
         this.ball;
-        this.expWall;
+        this.expansionWall;
         this.wall;
         this.checkSpace;
         this.isGameOver = false;
@@ -13,6 +13,8 @@ class Game{
 
     startLoop() {
         this.ball = new Ball(this.canvas);
+        this.expansionWall = new ExpansionWall(this.canvas, 3);
+        this.canvas.addEventListener("click", this.expansionWall.obtenerCoords, false);
         const loop = () => {
             
             this.checkAllCollisions();
@@ -30,6 +32,7 @@ class Game{
     
     updateCanvas(){
         this.ball.update();
+        this.expansionWall.update();
     };
 
     clearCanvas(){
@@ -37,11 +40,14 @@ class Game{
     };
 
     drawCanvas(){
-        this.ball.draw();    
+        this.ball.draw();
+        this.expansionWall.draw();
+        //if (this.expansionWall.obtenerCoords(event)){};
     };
 
     checkAllCollisions(){
         this.ball.checkCollisionScreen();
+        this.expansionWall.checkScreen();
     };
 
     gameOverCallback(callback){

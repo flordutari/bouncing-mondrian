@@ -20,10 +20,10 @@ class Ball {
     draw(){
         this.ctx.clearRect(0, 0, innerWidth, innerHeight);
 
-        this.ctx.fillStyle = 'red';
+        this.ctx.fillStyle = '#E3A72F';
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, 10, 0, 2*Math.PI, false);
-        this.ctx.strokeStyle = 'red';
+        this.ctx.strokeStyle = '#E3A72F';
         this.ctx.fill();
         this.ctx.stroke();
         
