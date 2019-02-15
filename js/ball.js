@@ -20,21 +20,21 @@ class Ball {
     draw(){
         this.ctx.clearRect(0, 0, innerWidth, innerHeight);
 
-        this.ctx.fillStyle = '#E3A72F';
+        this.ctx.fillStyle = '#FC4B2A';
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, 10, 0, 2*Math.PI, false);
-        this.ctx.strokeStyle = '#E3A72F';
+        this.ctx.strokeStyle = '#FC4B2A';
         this.ctx.fill();
         this.ctx.stroke();
         
         if(this.x > innerWidth || this.x < 0){
             this.dx = -(this.dx);
-        }
+        };
         this.x += this.dx;
     
         if(this.y > innerHeight || this.y < 0){
             this.dy = -(this.dy);
-        }
+        };
         this.y += this.dy;
     };
 
@@ -51,6 +51,23 @@ class Ball {
             this.dx = 1;
         } else if (this.x + this.size/2 >= this.canvas.width){
             this.dx = -1;
+        };
+    };
+
+    checkCollisionWall(){
+        
+    };
+
+    checkCollisionExpWall(expansionWall){
+        const collideRight = this.x + this.size / 2 > expansionWall.x - expansionWall.size / 2;
+        const collideLeft = this.x - this.size / 2 < expansionWall.x + expansionWall.size / 2;
+        const collideTop = this.y + this.size / 2 > expansionWall.y - expansionWall.size / 2;
+        const collideBottom = this.y - this.size / 2 < expansionWall.y + expansionWall.size / 2;
+
+        if(collideRight || collideLeft || collideTop || collideBottom) {
+            return true;
         }
-    }
+
+        return false;
+    };
 }

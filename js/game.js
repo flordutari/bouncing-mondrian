@@ -13,8 +13,19 @@ class Game{
 
     startLoop() {
         this.ball = new Ball(this.canvas);
-        this.expansionWall = new ExpansionWall(this.canvas, 3);
-        this.canvas.addEventListener("click", this.expansionWall.obtenerCoords, false);
+        this.wall = new Wall(this.canvas);
+
+        let x;
+        let y;
+        this.canvas.addEventListener("click",  (event) => {
+            x = event.x;
+            y = event.y;
+            x -= this.canvas.offsetLeft;
+            y -= this.canvas.offsetTop;
+            this.expansionWall = new ExpansionWall(this.canvas, 3, x, y);
+            console.log(x, y)
+        });
+        
         const loop = () => {
             
             this.checkAllCollisions();
@@ -32,7 +43,9 @@ class Game{
     
     updateCanvas(){
         this.ball.update();
-        this.expansionWall.update();
+        if(this.expansionWall){
+            this.expansionWall.update();
+        }
     };
 
     clearCanvas(){
@@ -41,13 +54,26 @@ class Game{
 
     drawCanvas(){
         this.ball.draw();
-        this.expansionWall.draw();
+        if(this.expansionWall){
+            this.expansionWall.draw();
+        }
+        this.wall.draw();
         //if (this.expansionWall.obtenerCoords(event)){};
     };
 
     checkAllCollisions(){
         this.ball.checkCollisionScreen();
+        if(this.expansionWall){
         this.expansionWall.checkScreen();
+        };
+        /*checkCollisionWall();
+        if(this.ball.checkCollisionExpWall(expansionWall)){
+            this.expansionWall.loseLive();
+            if(this.expansionWall.lives === 0){
+                this.isGameOver = true;
+                this.onGameOver();
+            };
+        };*/
     };
 
     gameOverCallback(callback){

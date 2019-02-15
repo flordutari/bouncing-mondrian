@@ -98,5 +98,6 @@ p {
 }
 
 canvas {
- border : 4px solid #F0ECC9;
+ border : 4px solid #ECE1C3;
+ background-color: rgb(235, 233, 227);
 }
