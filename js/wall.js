@@ -4,8 +4,8 @@ class Wall{
     constructor(canvas){
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
-        this.size = 100;
-        this.x = 100;
+        this.size = 150;
+        this.x = 50;
         this.y = 100;
     };
 

@@ -23,7 +23,6 @@ class Game{
             x -= this.canvas.offsetLeft;
             y -= this.canvas.offsetTop;
             this.expansionWall = new ExpansionWall(this.canvas, 3, x, y);
-            console.log(x, y)
         });
         
         const loop = () => {
@@ -63,17 +62,18 @@ class Game{
 
     checkAllCollisions(){
         this.ball.checkCollisionScreen();
+        this.ball.checkCollisionWall(this.wall);
+    
         if(this.expansionWall){
-        this.expansionWall.checkScreen();
-        };
-        /*checkCollisionWall();
-        if(this.ball.checkCollisionExpWall(expansionWall)){
-            this.expansionWall.loseLive();
+        this.expansionWall.checkScreen();        
+        
+        this.ball.checkCollisionExpWall(this.expansionWall);
+            /*this.expansionWall.loseLive();
             if(this.expansionWall.lives === 0){
                 this.isGameOver = true;
                 this.onGameOver();
-            };
-        };*/
+            };*/
+        };
     };
 
     gameOverCallback(callback){
