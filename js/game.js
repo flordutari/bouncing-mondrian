@@ -7,17 +7,18 @@ class Game{
         this.ball;
         this.hGrowingWall;
         this.vGrowingWall;
-        this.walls = [];
+        this.wall;
         this.checkSpace;
         this.isGameOver = false;
     };
 
     startLoop() {
         this.ball = new Ball(this.canvas);
-        this.walls.push(new Wall(this.canvas, this.canvas.width, 20, 0, 0));
-        this.walls.push(new Wall(this.canvas, 20, this.canvas.height - 40, this.canvas.width - 20, 20));
-        this.walls.push(new Wall(this.canvas, this.canvas.width, 20, 0, this.canvas.height - 20));
-        this.walls.push(new Wall(this.canvas, 20, this.canvas.height - 40, 0, 20));
+        this.wall = new Wall(this.canvas, 150, 200, 150, 90);
+        // this.walls.push(new Wall(this.canvas, this.canvas.width, 20, 0, 0));
+        // this.walls.push(new Wall(this.canvas, 20, this.canvas.height - 40, this.canvas.width - 20, 20));
+        // this.walls.push(new Wall(this.canvas, this.canvas.width, 20, 0, this.canvas.height - 20));
+        // this.walls.push(new Wall(this.canvas, 20, this.canvas.height - 40, 0, 20));
 
         let x;
         let y;
@@ -61,16 +62,16 @@ class Game{
         if(this.vGrowingWall){
             this.vGrowingWall.draw();
         }
-        this.walls.forEach((wall) => {
-            wall.draw();
-        });
+        // this.walls.forEach((wall) => {
+        this.wall.draw();
+        // });
         
     };
 
     checkAllCollisions(){
-        this.walls.forEach((wall) => {
-            this.ball.checkCollisionWalls(wall);
-        });
+        // this.walls.forEach((wall) => {
+        this.ball.checkCollisionWalls(this.wall);
+        //  });
         
         this.ball.checkCollisionScreen();
        
