@@ -1,6 +1,6 @@
 'use-strict'
 
-class ExpansionWall{
+class HGrowingWall{
     constructor(canvas, lives, x, y){
         this.sizeX1 = 20;
         this.sizeX2 = -20;
@@ -28,12 +28,12 @@ class ExpansionWall{
 
     draw(){
         for(let i = 0; i < this.canvas.width; i++){  
-            this.ctx.fillStyle = "#9A151A";
+            this.ctx.fillStyle = "rgba(150, 10, 10, .8)";
             this.ctx.fillRect(this.x, this.y, this.sizeX1, this.sizeY);
         };
 
         for(let i = 0; i < this.canvas.width; i++){  
-            this.ctx.fillStyle = "#9A151A";
+            this.ctx.fillStyle = "rgba(10, 10, 150, .8)";
             this.ctx.fillRect(this.x, this.y, this.sizeX2, this.sizeY);
         };
     };
@@ -51,13 +51,12 @@ class ExpansionWall{
         };  
     };
 
-    
-
     loseLive(){
         this.lives--;
+        console.log(this.lives);
     };
 
     becomeFixedWall(){
-
+        if(this.convertWallX1) {}
     };
 };

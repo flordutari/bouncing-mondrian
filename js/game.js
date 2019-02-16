@@ -5,7 +5,8 @@ class Game{
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
         this.ball;
-        this.expansionWall;
+        this.hGrowingWall;
+        this.vGrowingWall;
         this.wall;
         this.checkSpace;
         this.isGameOver = false;
@@ -17,12 +18,20 @@ class Game{
 
         let x;
         let y;
+        // this.canvas.addEventListener("click",  (event) => {
+        //     x = event.x;
+        //     y = event.y;
+        //     x -= this.canvas.offsetLeft;
+        //     y -= this.canvas.offsetTop;
+        //     this.hGrowingWall = new HGrowingWall(this.canvas, 3, x, y);
+        // });
+
         this.canvas.addEventListener("click",  (event) => {
             x = event.x;
             y = event.y;
             x -= this.canvas.offsetLeft;
             y -= this.canvas.offsetTop;
-            this.expansionWall = new ExpansionWall(this.canvas, 3, x, y);
+            this.vGrowingWall = new VGrowingWall(this.canvas, 3, x, y);
         });
         
         const loop = () => {
@@ -42,8 +51,8 @@ class Game{
     
     updateCanvas(){
         this.ball.update();
-        if(this.expansionWall){
-            this.expansionWall.update();
+        if(this.hGrowingWall){
+            this.hGrowingWall.update();
         }
     };
 
@@ -53,28 +62,42 @@ class Game{
 
     drawCanvas(){
         this.ball.draw();
-        if(this.expansionWall){
-            this.expansionWall.draw();
+        if(this.hGrowingWall){
+            this.hGrowingWall.draw();
+        }
+        if(this.vGrowingWall){
+            this.vGrowingWall.draw();
         }
         this.wall.draw();
-        //if (this.expansionWall.obtenerCoords(event)){};
     };
 
     checkAllCollisions(){
         this.ball.checkCollisionScreen();
         this.ball.checkCollisionWall(this.wall);
-    
-        if(this.expansionWall){
-        this.expansionWall.checkScreen();        
-        
-        this.ball.checkCollisionExpWall(this.expansionWall);
-            /*this.expansionWall.loseLive();
-            if(this.expansionWall.lives === 0){
+        if(this.hGrowingWall){
+        this.hGrowingWall.checkScreen();
+        this.ball.checkCollisionExpWall(this.hGrowingWall);
+            if (this.hGrowingWall === true) {
+                this.hGrowingWall.loseLive();
+            }
+            if(this.hGrowingWall.lives === 0){
                 this.isGameOver = true;
                 this.onGameOver();
-            };*/
+            };
+        };
+        if(this.vGrowingWall){
+            this.vGrowingWall.checkScreen();
+            this.ball.checkCollisionExpWall(this.vGrowingWall);
+                if (this.vGrowingWall === true) {
+                    this.vGrowingWall.loseLive();
+                }
+                if(this.vGrowingWall.lives === 0){
+                    this.isGameOver = true;
+                    this.onGameOver();
+                };
         };
     };
+    
 
     gameOverCallback(callback){
         this.onGameOver = callback;
