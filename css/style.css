@@ -93,10 +93,11 @@ p {
 }*/
 
 .game-screen {
-    width: 800px;
-    height: 400px;
+    width: 840px;
+    height: 440px;
 }
 
 canvas {
- background-color: rgb(221, 221, 221);
+    margin: 50px;
+    background-color: rgb(221, 221, 221);
 }

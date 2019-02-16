@@ -1,17 +1,18 @@
 'use-strict'
 
 class Wall{
-    constructor(canvas){
+    constructor(canvas, sizeX, sizeY, x, y){
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
-        this.size = 150;
-        this.x = 50;
-        this.y = 100;
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
+        this.x = x;
+        this.y = y;
     };
 
     draw(){
-        this.ctx.fillStyle = "#55151A";
-        this.ctx.fillRect(this.x, this.y, this.size, this.size); 
+        this.ctx.fillStyle = "#050505";
+        this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY); 
     };
    
 };
