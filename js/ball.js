@@ -2,7 +2,7 @@
 
 class Ball {
     constructor(canvas){
-        this.radius = 5;
+        this.radius = 10;
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
         this.x = 100;
@@ -20,10 +20,10 @@ class Ball {
     draw(){
         this.ctx.clearRect(0, 0, innerWidth, innerHeight);
 
-        this.ctx.fillStyle = '#090909';
+        this.ctx.fillStyle = 'rgb(199, 92, 21)';
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false);
-        this.ctx.strokeStyle = '#090909';
+        this.ctx.strokeStyle = 'rgb(199, 92, 21)';
         this.ctx.fill();
         this.ctx.stroke();
         
@@ -58,10 +58,10 @@ class Ball {
         
         const collision = top && bottom && right && left; 
 
-        const x1 = this.x - this.radius + 1 === wall.x + wall.sizeX;
-        const y1 = this.y - this.radius + 1 === wall.y + wall.sizeY;
-        const x2 = this.x + this.radius - 1 === wall.x;
-        const y2 = this.y + this.radius - 1 === wall.y;
+        const x1 = this.x - this.radius + 2 === wall.x + wall.sizeX;
+        const y1 = this.y - this.radius + 2 === wall.y + wall.sizeY;
+        const x2 = this.x + this.radius - 2 === wall.x;
+        const y2 = this.y + this.radius - 2 === wall.y;
 
         if(collision && x1){
             this.dx = -this.dx;
@@ -84,17 +84,32 @@ class Ball {
         };
     };
 
-    checkvGrowWall(vGrowingWall){
-        const bottom = this.y - this.radius < (vGrowingWall.y + vGrowingWall.sizeY1);
-        const top = this.y + this.radius >  vGrowingWall.y;
-        const right = this.x - this.radius < (vGrowingWall.x + vGrowingWall.sizeX);
-        const left = this.x + this.radius >  vGrowingWall.x;
+    checkGrowWall(wall){
+        if(wall.dy === 1) {
+            const bottom = this.y - this.radius < (wall.y + wall.sizeY);
+            const top = this.y + this.radius > wall.y;
+            const right = this.x - this.radius < (wall.x + wall.sizeX);
+            const left = this.x + this.radius > wall.x;
+            
+            if(bottom && top && left && right){
+                return true;
+            } else {
+                return false;
+            };
+        };
 
-        if(bottom && top && left && right){
-            return true;
-        } else {
-            return false;
-        }
+        if(wall.dy === -1){
+            const bottom = this.y - this.radius > (wall.y + wall.sizeY);
+            const top = this.y + this.radius < wall.y;
+            const right = this.x - this.radius < (wall.x + wall.sizeX);
+            const left = this.x + this.radius > wall.x;
+            
+            if(bottom && top && left && right){
+                return true;
+            } else {
+                return false;
+            };
+        };
     };
 };
     

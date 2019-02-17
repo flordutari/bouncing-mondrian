@@ -95,9 +95,11 @@ p {
 .game-screen {
     width: 840px;
     height: 440px;
+    background-image: url("../img/flames-3286912_960_720.png")
 }
 
 canvas {
     margin: 50px;
     background-color: rgb(221, 221, 221);
+    color: rgb(199, 92, 21);
 }
