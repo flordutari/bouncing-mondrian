@@ -56,7 +56,9 @@ class VGrowingWall{
         console.log(this.lives);
     };
 
-    becomeFixedWall(){
-
+    becomeFixedWallOne(){
+        if(this.convertWallY1){
+            
+        }
     };
 };

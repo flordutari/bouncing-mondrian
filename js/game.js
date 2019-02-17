@@ -7,23 +7,22 @@ class Game{
         this.ball;
         this.hGrowingWall;
         this.vGrowingWall;
-        this.wall;
+        this.walls = [];
         this.checkSpace;
         this.isGameOver = false;
     };
 
     startLoop() {
         this.ball = new Ball(this.canvas);
-        this.wall = new Wall(this.canvas, 150, 200, 150, 90);
-        // this.walls.push(new Wall(this.canvas, this.canvas.width, 20, 0, 0));
-        // this.walls.push(new Wall(this.canvas, 20, this.canvas.height - 40, this.canvas.width - 20, 20));
-        // this.walls.push(new Wall(this.canvas, this.canvas.width, 20, 0, this.canvas.height - 20));
-        // this.walls.push(new Wall(this.canvas, 20, this.canvas.height - 40, 0, 20));
+        this.walls.push(new Wall(this.canvas, this.canvas.width, 20, 0, 0));
+        this.walls.push(new Wall(this.canvas, 20, this.canvas.height - 40, this.canvas.width - 20, 20));
+        this.walls.push(new Wall(this.canvas, this.canvas.width, 20, 0, this.canvas.height - 20));
+        this.walls.push(new Wall(this.canvas, 20, this.canvas.height - 40, 0, 20));
 
         let x;
         let y;
        
-        this.canvas.addEventListener("click",  (event) => {
+        this.canvas.addEventListener("click", (event) => {
             x = event.x;
             y = event.y;
             x -= this.canvas.offsetLeft;
@@ -62,18 +61,30 @@ class Game{
         if(this.vGrowingWall){
             this.vGrowingWall.draw();
         }
-        // this.walls.forEach((wall) => {
-        this.wall.draw();
-        // });
+        this.walls.forEach((wall) => {
+         wall.draw();
+        });
         
     };
 
     checkAllCollisions(){
-        // this.walls.forEach((wall) => {
-        this.ball.checkCollisionWalls(this.wall);
-        //  });
+        this.walls.forEach((wall) => {
+        this.ball.checkCollisionWalls(wall);
+         });
         
         this.ball.checkCollisionScreen();
+        if(this.vGrowingWall){
+            this.vGrowingWall.checkScreen();
+            this.ball.checkvGrowWall(this.vGrowingWall);
+                if (this.vGrowingWall === true) {
+                    this.vGrowingWall.loseLive();
+                    
+                }
+                if(this.vGrowingWall.lives === 0){
+                    this.isGameOver = true;
+                    this.onGameOver();
+                };
+        };
        
     };
     
@@ -82,14 +93,4 @@ class Game{
     };
 };
 
- // if(this.vGrowingWall){
-        //     this.vGrowingWall.checkScreen();
-        //     this.ball.checkCollisionExpWall(this.vGrowingWall);
-        //         if (this.vGrowingWall === true) {
-        //             this.vGrowingWall.loseLive();
-        //         }
-        //         if(this.vGrowingWall.lives === 0){
-        //             this.isGameOver = true;
-        //             this.onGameOver();
-        //         };
-        // };
+ 
