@@ -31,18 +31,14 @@ class VGrowingWall{
     };
 
     draw(){
-        if(this.dy === 1){
-            for(let i = 0; i < this.canvas.height; i++){  
-                this.ctx.fillStyle = "rgba(20, 20, 200, .8)";
-                this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
-            };
+        if(this.dy === 1){ 
+            this.ctx.fillStyle = "rgba(20, 20, 200, .8)";
+            this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
         };
 
-        if(this.dy === -1){
-            for(let i = 0; i < this.canvas.height; i++){  
-                this.ctx.fillStyle = "rgba(200, 20, 20, .8)";
-                this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
-            };
+        if(this.dy === -1){  
+            this.ctx.fillStyle = "rgba(200, 20, 20, .8)";
+            this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
         };
     };
     
@@ -64,5 +60,8 @@ class VGrowingWall{
         this.lives--;
     };
 
-    
+    drawFixed(){
+        this.ctx.fillStyle = "#050505";
+        this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
+    };
 };
