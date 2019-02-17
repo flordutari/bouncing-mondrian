@@ -9,7 +9,7 @@ class HGrowingWall{
         this.ctx = this.canvas.getContext('2d');
         this.x = x;
         this.y = y;
-        this.speed = 2;
+        this.speed = 1;
         this.dx = 1;
         this.dy = 1;
         this.lives = lives;

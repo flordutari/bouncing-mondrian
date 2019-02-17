@@ -8,7 +8,8 @@ class Game {
     this.growWallTop = [];
     this.growWallBottom = [];
     this.walls = [];
-    this.convWalls = [];
+    this.convWallsTop = [];
+    this.convWallsBottom = [];
     this.checkSpace;
     this.isGameOver = false;
     this.module = 20;
@@ -124,8 +125,13 @@ class Game {
         growWall.draw();
         });
     }
-    if(this.convWalls) {
-        this.convWalls.forEach(wall => {
+    if(this.convWallsTop) {
+        this.convWallsTop.forEach(wall => {
+        wall.drawFixed();
+        });
+    };
+    if(this.convWallsBottom) {
+        this.convWallsBottom.forEach(wall => {
         wall.drawFixed();
         });
     }
@@ -139,10 +145,13 @@ class Game {
       this.ball.checkCollisionWalls(wall);
     });
 
-    this.convWalls.forEach(wall => {
-        this.ball.checkCollisionWalls(wall);
+    this.convWallsTop.forEach(wall => {
         this.ball.checkCollisionWallsNegative(wall);
       });
+
+    this.convWallsBottom.forEach(wall => {
+      this.ball.checkCollisionWalls(wall);
+    });
 
     this.ball.checkCollisionScreen();
 
@@ -152,9 +161,8 @@ class Game {
         this.growWallTop.pop(growWall);
       }
       if(growWall.convertWallTop === true){
-        this.convWalls.push(growWall);
+        this.convWallsTop.push(growWall);
         this.growWallTop.pop(growWall);
-        console.log(this.convWalls);
       }
     });
 
@@ -164,9 +172,8 @@ class Game {
         this.growWallBottom.pop(growWall);
       }
       if(growWall.convertWallBottom === true){
-        this.convWalls.push(growWall);
+        this.convWallsBottom.push(growWall);
         this.growWallBottom.pop(growWall);
-        console.log(this.convWalls);
       }
     });
   }

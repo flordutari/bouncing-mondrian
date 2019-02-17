@@ -7,14 +7,13 @@ class Ball {
         this.ctx = this.canvas.getContext('2d');
         this.x = 100;
         this.y = 200;
-        this.dx = -1;
-        this.dy = -1;
-        this.speed = 1;
+        this.dx = 1;
+        this.dy = 1;
     };
     
     update(){
-        this.x += this.dx * this.speed;
-        this.y += this.dy * this.speed;
+        this.x += this.dx;
+        this.y += this.dy;
     };
 
     draw(){
@@ -62,6 +61,40 @@ class Ball {
         const y1 = this.y - this.radius + 2 === wall.y + wall.sizeY;
         const x2 = this.x + this.radius - 2 === wall.x;
         const y2 = this.y + this.radius - 2 === wall.y;
+
+        if(collision && x1){
+            this.dx = -this.dx;
+            this.dy = this.dy;
+        };
+
+        if(collision && y1){
+            this.dx = this.dx;
+            this.dy = -this.dy;
+        };
+
+        if(collision && x2){
+            this.dx = -this.dx;
+            this.dy = this.dy;
+        };
+
+        if(collision && y2){
+            this.dx = this.dx;
+            this.dy = -this.dy;
+        };
+    };
+
+    checkCollisionWallsNegative(wall){
+        const bottom = this.y - this.radius < wall.y;
+        const top = this.y + this.radius > wall.y - Math.abs(wall.sizeY);
+        const right = this.x - this.radius < (wall.x + wall.sizeX);
+        const left = this.x + this.radius >  wall.x;
+        
+        const collision = top && bottom && right && left; 
+
+        const x1 = this.x - this.radius + 1 === wall.x + wall.sizeX;
+        const y1 = this.y - this.radius + 1 === wall.y;
+        const x2 = this.x + this.radius - 1 === wall.x;
+        const y2 = this.y + this.radius - 1 === wall.y - Math.abs(wall.sizeY);
 
         if(collision && x1){
             this.dx = -this.dx;

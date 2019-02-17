@@ -8,7 +8,6 @@ class VGrowingWall{
         this.ctx = this.canvas.getContext('2d');
         this.x = x;
         this.y = y;
-        this.speed = 2;
         this.dx = 1;
         this.dy = dy;
         this.lives = lives;
