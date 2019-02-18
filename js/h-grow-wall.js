@@ -1,62 +1,66 @@
 'use-strict'
 
 class HGrowingWall{
-    constructor(canvas, lives, x, y){
-        this.sizeX1 = 20;
-        this.sizeX2 = -20;
-        this.sizeY = 20;
+    constructor(canvas, lives, x, y, sizeX, dx){
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
+        this.sizeX = sizeX;
+        this.sizeY = 20;
         this.x = x;
         this.y = y;
-        this.speed = 1;
-        this.dx = 1;
+        this.dx = dx;
         this.dy = 1;
         this.lives = lives;
-        this.convertWallX1 = false;
-        this.convertWallX2 = false;
+        this.convertWallRight = false;
+        this.convertWallLeft = false;
     };
 
     update(){
-        if (this.convertWallX1 === false){
-            this.sizeX1++;
+        if(this.dx === 1){
+            if (this.convertWallRight === false){
+                this.sizeX++;
+            };
         };
-        if(this.convertWallX2 === false){
-            this.sizeX2--;
+        if(this.dx === -1){
+            if(this.convertWallLeft === false){
+                this.sizeX--;
+            };
         };
+        this.checkScreen();
     };
 
     draw(){
-        for(let i = 0; i < this.canvas.width; i++){  
-            this.ctx.fillStyle = "rgba(150, 10, 10, .8)";
-            this.ctx.fillRect(this.x, this.y, this.sizeX1, this.sizeY);
+        if(this.dx === 1){
+            this.ctx.fillStyle = "rgba(20, 20, 200, .8)";
+            this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
         };
 
-        for(let i = 0; i < this.canvas.width; i++){  
-            this.ctx.fillStyle = "rgba(10, 10, 150, .8)";
-            this.ctx.fillRect(this.x, this.y, this.sizeX2, this.sizeY);
+        if(this.dx === -1){  
+            this.ctx.fillStyle = "rgba(200, 20, 20, .8)";
+            this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
         };
-    };
-       
-    setDirection(direction){
-        this.direction = direction;
     };
 
     checkScreen(){
-        if((this.canvas.width - this.x) === this.sizeX1){
-            this.convertWallX1 = true;
+        if(this.dx === -1){
+            if(this.x - 20 === Math.abs(this.sizeX)){
+                this.convertWallLeft = true;
+            };
         };
-        if(-this.x === this.sizeX2){
-            this.convertWallX2 = true;
-        };  
+
+        if(this.dx === 1){
+            if(this.canvas.width - this.x - 20 === this.sizeX){
+                this.convertWallRight = true;
+            }; 
+        };
     };
 
     loseLive(){
         this.lives--;
-        console.log(this.lives);
     };
 
-    becomeFixedWall(){
-        if(this.convertWallX1) {}
+    drawFixed(){
+        this.ctx.fillStyle = "#050505";
+        this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
     };
 };

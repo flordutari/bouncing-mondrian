@@ -10,7 +10,7 @@ const main = () => {
     const buildSplashScreen = () => {
         const splashScreen = buildDom(`
         <section class="splash-screen">
-            <h1>Isolate it</h1>
+            <h1>Fire hazard</h1>
             <button>Start</button>
         </section>
         `);
@@ -23,19 +23,10 @@ const main = () => {
         const gameScreen = buildDom(`
             <section class="game-screen">
                 <canvas></canvas>
-            </section>
-            <form>
-                <input id="switchButton1" class="switch" type="button" value="V" />
-                <input id="switchButton2" class="switch" type="button" value="V" />
-                <input id="switchButton3" class="switch" type="button" value="V" />
-                <input id="switchButton4" class="switch" type="button" value="V" />
-                <input id="nextLevelButton" type="button" value="Next level" />
-                <input id="playAgainButton" type="button" value="Play again" />
-            </form>
-            
+            </section>           
         `);
 
-        setInterval(buildGameOver, 3000000);
+        setInterval(buildGameOver, 5000000);
 
         const width = document.querySelector('.game-screen').offsetWidth;
         const height = document.querySelector('.game-screen').offsetHeight;

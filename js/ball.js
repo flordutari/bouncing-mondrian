@@ -12,6 +12,7 @@ class Ball {
     };
     
     update(){
+        console.log(this.dx)
         this.x += this.dx;
         this.y += this.dy;
     };
@@ -38,29 +39,29 @@ class Ball {
     };
 
     checkCollisionScreen(){
-        if(this.y - this.radius <= 0){
+        if(this.y - this.radius < 0){
             this.dy = this.dy;
-        } else if (this.y + this.radius >= this.canvas.height){
+        } else if (this.y + this.radius > this.canvas.height){
             this.dy = -this.dy;
-        } else if (this.x - this.radius <= 0){
+        } else if (this.x - this.radius < 0){
             this.dx = this.dx;
-        } else if (this.x + this.radius >= this.canvas.width){
+        } else if (this.x + this.radius > this.canvas.width){
             this.dx = -this.dx;
         };
     };
 
     checkCollisionWalls(wall){
         const bottom = this.y - this.radius < (wall.y + wall.sizeY);
-        const top = this.y + this.radius >  wall.y;
+        const top = this.y + this.radius > wall.y;
         const right = this.x - this.radius < (wall.x + wall.sizeX);
-        const left = this.x + this.radius >  wall.x;
+        const left = this.x + this.radius > wall.x;
         
         const collision = top && bottom && right && left; 
 
-        const x1 = this.x - this.radius + 2 === wall.x + wall.sizeX;
-        const y1 = this.y - this.radius + 2 === wall.y + wall.sizeY;
-        const x2 = this.x + this.radius - 2 === wall.x;
-        const y2 = this.y + this.radius - 2 === wall.y;
+        const x1 = this.x - this.radius + 2 < wall.x + wall.sizeX;
+        const y1 = this.y - this.radius + 2 < wall.y + wall.sizeY;
+        const x2 = this.x + this.radius - 2 > wall.x;
+        const y2 = this.y + this.radius - 2 > wall.y;
 
         if(collision && x1){
             this.dx = -this.dx;
@@ -81,20 +82,21 @@ class Ball {
             this.dx = this.dx;
             this.dy = -this.dy;
         };
+        
     };
 
     checkCollisionWallsNegative(wall){
         const bottom = this.y - this.radius < wall.y;
         const top = this.y + this.radius > wall.y - Math.abs(wall.sizeY);
         const right = this.x - this.radius < (wall.x + wall.sizeX);
-        const left = this.x + this.radius >  wall.x;
+        const left = this.x + this.radius > wall.x;
         
         const collision = top && bottom && right && left; 
 
-        const x1 = this.x - this.radius + 1 === wall.x + wall.sizeX;
-        const y1 = this.y - this.radius + 1 === wall.y;
-        const x2 = this.x + this.radius - 1 === wall.x;
-        const y2 = this.y + this.radius - 1 === wall.y - Math.abs(wall.sizeY);
+        const x1 = this.x - this.radius + 2 < wall.x + wall.sizeX;
+        const y1 = this.y - this.radius + 2 < wall.y;
+        const x2 = this.x + this.radius - 2 > wall.x;
+        const y2 = this.y + this.radius - 2 > wall.y - Math.abs(wall.sizeY);
 
         if(collision && x1){
             this.dx = -this.dx;
@@ -116,7 +118,7 @@ class Ball {
             this.dy = -this.dy;
         };
     };
-
+    
     checkGrowWall(wall){
         if(wall.dy === 1) {
             const bottom = this.y - this.radius < (wall.y + wall.sizeY);
@@ -131,11 +133,37 @@ class Ball {
             };
         };
 
-        if(wall.dy === -1){
+        if(wall.dy === -1) {
             const bottom = this.y - this.radius > (wall.y + wall.sizeY);
             const top = this.y + this.radius < wall.y;
             const right = this.x - this.radius < (wall.x + wall.sizeX);
             const left = this.x + this.radius > wall.x;
+            
+            if(bottom && top && left && right){
+                return true;
+            } else {
+                return false;
+            };
+        };
+
+        if(wall.dx === 1) {
+            const bottom = this.y - this.radius < (wall.y + wall.sizeY);
+            const top = this.y + this.radius > wall.y;
+            const right = this.x - this.radius < (wall.x + wall.sizeX);
+            const left = this.x + this.radius > wall.x;
+            
+            if(bottom && top && left && right){
+                return true;
+            } else {
+                return false;
+            };
+        };
+
+        if(wall.dx === -1) {
+            const bottom = this.y - this.radius > (wall.y + wall.sizeY);
+            const top = this.y + this.radius < wall.y;
+            const right = this.x - this.radius > (wall.x + wall.sizeX);
+            const left = this.x + this.radius < wall.x;
             
             if(bottom && top && left && right){
                 return true;

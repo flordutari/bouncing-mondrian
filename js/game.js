@@ -7,9 +7,17 @@ class Game {
     this.ball;
     this.growWallTop = [];
     this.growWallBottom = [];
+    this.growWallLeft = [];
+    this.growWallRight = [];
     this.walls = [];
     this.convWallsTop = [];
     this.convWallsBottom = [];
+    this.convWallsLeft = [];
+    this.convWallsRight = [];
+    this.unirWallsTop = [];
+    this.convWallsBottom = [];
+    this.convWallsLeft = [];
+    this.convWallsRight = [];
     this.checkSpace;
     this.isGameOver = false;
     this.module = 20;
@@ -17,42 +25,16 @@ class Game {
 
   startLoop() {
     this.ball = new Ball(this.canvas);
-    this.walls.push(
-      new Wall(this.canvas, this.canvas.width, this.module, 0, 0)
-    );
-    this.walls.push(
-      new Wall(
-        this.canvas,
-        this.module,
-        this.canvas.height - this.module * 2,
-        this.canvas.width - this.module,
-        this.module
-      )
-    );
-    this.walls.push(
-      new Wall(
-        this.canvas,
-        this.canvas.width,
-        this.module,
-        0,
-        this.canvas.height - this.module
-      )
-    );
-    this.walls.push(
-      new Wall(
-        this.canvas,
-        this.module,
-        this.canvas.height - this.module * 2,
-        0,
-        this.module
-      )
-    );
+    this.walls.push(new Wall(this.canvas, this.canvas.width, this.module, 0, 0));
+    this.walls.push(new Wall(this.canvas, this.module, this.canvas.height - this.module * 2, this.canvas.width - this.module, this.module));
+    this.walls.push(new Wall(this.canvas, this.canvas.width, this.module, 0, this.canvas.height - this.module));
+    this.walls.push(new Wall(this.canvas, this.module, this.canvas.height - this.module * 2, 0, this.module));
 
     let x;
     let y;
     this.canvas.addEventListener("click", event => {
-      x = event.x;
-      y = event.y;
+      x = Math.round(event.x / 20)*20;
+      y = Math.round(event.y / 20)*20;
       x -= this.canvas.offsetLeft;
       y -= this.canvas.offsetTop;
         
@@ -60,6 +42,10 @@ class Game {
         this.growWallBottom.push(new VGrowingWall(this.canvas, 3, x, y, 20, 1));};
       if(this.growWallTop.length === 0 && this.growWallBottom.length <= 1){
         this.growWallTop.push(new VGrowingWall(this.canvas, 3, x, y, -20, -1));};
+      // if(this.growWallRight.length === 0 && this.growWallLeft <= 1){
+      //   this.growWallRight.push(new HGrowingWall(this.canvas, 3, x, y, 20, 1));};
+      // if(this.growWallLeft.length === 0 && this.growWallRight.length <= 1){
+      //   this.growWallLeft.push(new HGrowingWall(this.canvas, 3, x, y, -20, -1));};
     });
 
     // this.canvas.addEventListener('mousemove', (event)=> {
@@ -83,21 +69,31 @@ class Game {
     };
 
     window.requestAnimationFrame(loop);
-  }
+  };
 
   updateCanvas() {
     this.ball.update();
     if (this.growWallTop) {
-      this.growWallTop.forEach(growWall => {
+        this.growWallTop.forEach(growWall => {
         growWall.update();
-      });
+        });
     }
     if (this.growWallBottom) {
         this.growWallBottom.forEach(growWall => {
-          growWall.update();
+        growWall.update();
         });
-      }
-  }
+    }
+    if (this.growWallLeft) {
+        this.growWallLeft.forEach(growWall => {
+        growWall.update();
+        });
+    }
+    if (this.growWallRight) {
+        this.growWallRight.forEach(growWall => {
+        growWall.update();
+        });
+    }
+  };
 
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -115,13 +111,13 @@ class Game {
         growWall.draw();
         });
     }
-    if (this.convWalls) {
-        this.growWallTop.forEach(growWall => {
+    if (this.growWallLeft) {
+        this.growWallLeft.forEach(growWall => {
         growWall.draw();
         });
     }
-    if (this.growWallBottom) {
-        this.growWallBottom.forEach(growWall => {
+    if (this.growWallRight) {
+        this.growWallRight.forEach(growWall => {
         growWall.draw();
         });
     }
@@ -129,9 +125,19 @@ class Game {
         this.convWallsTop.forEach(wall => {
         wall.drawFixed();
         });
-    };
+    }
     if(this.convWallsBottom) {
         this.convWallsBottom.forEach(wall => {
+        wall.drawFixed();
+        });
+    }
+    if(this.convWallsLeft) {
+        this.convWallsLeft.forEach(wall => {
+        wall.drawFixed();
+        });
+    }
+    if(this.convWallsRight) {
+        this.convWallsRight.forEach(wall => {
         wall.drawFixed();
         });
     }
@@ -147,11 +153,21 @@ class Game {
 
     this.convWallsTop.forEach(wall => {
         this.ball.checkCollisionWallsNegative(wall);
-      });
+        this.ball.takeDecision();
+    });
 
     this.convWallsBottom.forEach(wall => {
       this.ball.checkCollisionWalls(wall);
+      this.ball.takeDecision();
     });
+
+    // this.convWallsLeft.forEach(wall => {
+    //     this.ball.checkCollisionWallsNegative(wall);
+    // });
+
+    // this.convWallsRight.forEach(wall => {
+    //   this.ball.checkCollisionWalls(wall);
+    // });
 
     this.ball.checkCollisionScreen();
 
@@ -176,6 +192,28 @@ class Game {
         this.growWallBottom.pop(growWall);
       }
     });
+
+    // this.growWallLeft.forEach((growWall) => {
+    //     this.ball.checkGrowWall(this.growWallLeft);
+    //     if (this.ball.checkGrowWall(growWall) === true) {
+    //       this.growWallLeft.pop(growWall);
+    //     }
+    //     if(growWall.convertWallLeft === true){
+    //       this.convWallsLeft.push(growWall);
+    //       this.growWallLeft.pop(growWall);
+    //     }
+    //   });
+  
+    //   this.growWallRight.forEach((growWall) => {
+    //       this.ball.checkGrowWall(this.growWallRight);
+    //     if (this.ball.checkGrowWall(growWall) === true) {
+    //       this.growWallRight.pop(growWall);
+    //     }
+    //     if(growWall.convertWallRight === true){
+    //       this.convWallsRight.push(growWall);
+    //       this.growWallRight.pop(growWall);
+    //     }
+    //   });
   }
 
   gameOverCallback(callback) {

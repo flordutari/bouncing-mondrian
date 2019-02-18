@@ -2,10 +2,10 @@
 
 class VGrowingWall{
     constructor(canvas, lives, x, y, sizeY, dy){
-        this.sizeX = 20;
-        this.sizeY = sizeY;
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
+        this.sizeX = 20;
+        this.sizeY = sizeY;
         this.x = x;
         this.y = y;
         this.dx = 1;
@@ -31,12 +31,12 @@ class VGrowingWall{
 
     draw(){
         if(this.dy === 1){ 
-            this.ctx.fillStyle = "rgba(20, 20, 200, .8)";
+            this.ctx.fillStyle = "#78c6e8";
             this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
         };
 
         if(this.dy === -1){  
-            this.ctx.fillStyle = "rgba(200, 20, 20, .8)";
+            this.ctx.fillStyle = "#92b7ef";
             this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
         };
     };
