@@ -7,12 +7,11 @@ class Ball {
         this.ctx = this.canvas.getContext('2d');
         this.x = 100;
         this.y = 200;
-        this.dx = 1;
-        this.dy = 1;
+        this.dx = 2;
+        this.dy = 2;
     };
     
     update(){
-        console.log(this.dx)
         this.x += this.dx;
         this.y += this.dy;
     };
@@ -118,7 +117,7 @@ class Ball {
             this.dy = -this.dy;
         };
     };
-    
+
     checkGrowWall(wall){
         if(wall.dy === 1) {
             const bottom = this.y - this.radius < (wall.y + wall.sizeY);

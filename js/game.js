@@ -14,10 +14,7 @@ class Game {
     this.convWallsBottom = [];
     this.convWallsLeft = [];
     this.convWallsRight = [];
-    this.unirWallsTop = [];
-    this.convWallsBottom = [];
-    this.convWallsLeft = [];
-    this.convWallsRight = [];
+    this.unitedWallsV = [];
     this.checkSpace;
     this.isGameOver = false;
     this.module = 20;
@@ -47,16 +44,6 @@ class Game {
       // if(this.growWallLeft.length === 0 && this.growWallRight.length <= 1){
       //   this.growWallLeft.push(new HGrowingWall(this.canvas, 3, x, y, -20, -1));};
     });
-
-    // this.canvas.addEventListener('mousemove', (event)=> {
-    //     x = event.x;
-    //     y = event.y;
-
-    //     this.player.clearRect(0,0,1200,800);
-    //     this.player.beginPath();
-    //     this.player.arc(x,y,10,0,Math.PI*2,true);
-    //     this.player.fill();
-    // });
 
     const loop = () => {
       this.checkAllCollisions();
@@ -141,11 +128,30 @@ class Game {
         wall.drawFixed();
         });
     }
+    if(this.unitedWallsV) {
+      this.unitedWallsV.forEach(wall => {
+        wall.drawFixed();
+        });
+    }
     this.walls.forEach(wall => {
       wall.draw();
     });
   }
 
+  checkIfTwoWalls(){
+    this.convWallsTop.forEach((wall, indexTop) => {
+      this.convWallsBottom.find((otherWall, indexBottom) => {
+        if(otherWall.x === wall.x){
+          let equis = wall.x;
+        this.unitedWallsV.push(new VGrowingWall(this.canvas, 3, equis, 0, this.canvas.height, -1));
+        this.convWallsBottom.splice(indexBottom, 1);
+        this.convWallsTop.splice(indexTop, 1);
+      };
+
+      });
+    });
+  }
+  
   checkAllCollisions() {
     this.walls.forEach(wall => {
       this.ball.checkCollisionWalls(wall);
@@ -153,14 +159,15 @@ class Game {
 
     this.convWallsTop.forEach(wall => {
         this.ball.checkCollisionWallsNegative(wall);
-        this.ball.takeDecision();
     });
 
     this.convWallsBottom.forEach(wall => {
       this.ball.checkCollisionWalls(wall);
-      this.ball.takeDecision();
     });
 
+    this.unitedWallsV.forEach(wall => {
+      this.ball.checkCollisionWalls(wall);
+    });
     // this.convWallsLeft.forEach(wall => {
     //     this.ball.checkCollisionWallsNegative(wall);
     // });
@@ -192,6 +199,8 @@ class Game {
         this.growWallBottom.pop(growWall);
       }
     });
+
+    this.checkIfTwoWalls();
 
     // this.growWallLeft.forEach((growWall) => {
     //     this.ball.checkGrowWall(this.growWallLeft);
