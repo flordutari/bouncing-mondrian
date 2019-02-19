@@ -1,16 +1,15 @@
 'use-strict'
 
 class VGrowingWall{
-    constructor(canvas, lives, x, y, sizeY, dy){
+    constructor(canvas, x, y, sizeY, dy){
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
         this.sizeX = 20;
         this.sizeY = sizeY;
         this.x = x;
         this.y = y;
-        this.dx = 1;
+        this.dx = 2;
         this.dy = dy;
-        this.lives = lives;
         this.convertWallTop = false;
         this.convertWallBottom = false;
     };
@@ -53,10 +52,6 @@ class VGrowingWall{
                 this.convertWallBottom = true;
             }; 
         };
-    };
-
-    loseLive(){
-        this.lives--;
     };
 
     drawFixed(){

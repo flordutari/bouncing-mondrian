@@ -1,7 +1,7 @@
 'use-strict'
 
 class HGrowingWall{
-    constructor(canvas, lives, x, y, sizeX, dx){
+    constructor(canvas, x, y, sizeX, dx){
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
         this.sizeX = sizeX;
@@ -9,8 +9,7 @@ class HGrowingWall{
         this.x = x;
         this.y = y;
         this.dx = dx;
-        this.dy = 1;
-        this.lives = lives;
+        this.dy = 2;
         this.convertWallRight = false;
         this.convertWallLeft = false;
     };
@@ -31,12 +30,12 @@ class HGrowingWall{
 
     draw(){
         if(this.dx === 1){
-            this.ctx.fillStyle = "rgba(20, 20, 200, .8)";
+            this.ctx.fillStyle = "#78c6e8";
             this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
         };
 
         if(this.dx === -1){  
-            this.ctx.fillStyle = "rgba(200, 20, 20, .8)";
+            this.ctx.fillStyle = "#92b7ef";
             this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
         };
     };
@@ -53,10 +52,6 @@ class HGrowingWall{
                 this.convertWallRight = true;
             }; 
         };
-    };
-
-    loseLive(){
-        this.lives--;
     };
 
     drawFixed(){

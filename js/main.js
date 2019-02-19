@@ -23,10 +23,12 @@ const main = () => {
         const gameScreen = buildDom(`
             <section class="game-screen">
                 <canvas></canvas>
+                <p>Lives : ${this.lives} </p>
+                <p>Level : ${this.level} </p>
             </section>           
         `);
 
-        setInterval(buildGameOver, 5000000);
+        setInterval(buildGameOver, 500000000);
 
         const width = document.querySelector('.game-screen').offsetWidth;
         const height = document.querySelector('.game-screen').offsetHeight;
@@ -41,22 +43,12 @@ const main = () => {
         
         game.startLoop();
 
-        const setPlayerDirection = (event) => {
-            if(event.code === 'ArrowUp'){
-                game.player.setDirection(-1)
-            } else if(event.code === 'ArrowDown'){
-                game.player.setDirection(1)
-            };
-        };
-
-        document.addEventListener('click', setPlayerDirection);
-
     };
 
     const buildGameOver = () => {
         const gameOverScreen = buildDom(`
             <section class="game-over">
-                <h1>Game Over</h1>
+                <h2>Game Over</h2>
                 <button>Restart</button>
             </section>
         `);
