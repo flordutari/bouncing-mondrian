@@ -23,7 +23,7 @@ const main = () => {
         const gameScreen = buildDom(`
             <section class="game-screen">
                 <canvas class="jscv direction"></canvas>
-                <p class="lives">Lives : 5 </p>
+                <p class="lives">Lives : 3</p>
                 <p class="score">Score : 0</p>
                 <p class="instruction">Press Shift to toggle direction</p>
             </section>           

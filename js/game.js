@@ -19,7 +19,7 @@ class Game {
     this.isGameOver = false;
     this.module = 20;
     this.direction = false;
-    this.lives = 5;
+    this.lives = 3;
     this.score = 0;
   }
 
@@ -150,7 +150,8 @@ class Game {
       this.convWallsBottom.find((otherWall, indexBottom) => {
         if(otherWall.x === wall.x){
           let equis = wall.x;
-        this.unitedWallsV.push(new VGrowingWall(this.canvas, equis, 0, this.canvas.height, -1));
+          let ies = wall.y - Math.abs(otherWall.sizeY);
+        this.unitedWallsV.push(new VGrowingWall(this.canvas, equis, ies, (Math.abs(wall.sizeY) + Math.abs(otherWall.sizeY)-20), -1));
         this.score++;
         this.changeDomScore(this.score);
         this.convWallsBottom.splice(indexBottom, 1);
@@ -165,7 +166,8 @@ class Game {
       this.convWallsLeft.find((otherWall, indexBottom) => {
         if(otherWall.y === wall.y){
           let ies = wall.y;
-        this.unitedWallsH.push(new HGrowingWall(this.canvas, 0, ies, this.canvas.width, 1));
+          let equis = wall.x - Math.abs(otherWall.sizeX);
+        this.unitedWallsH.push(new HGrowingWall(this.canvas, equis, ies, (Math.abs(wall.sizeX) + Math.abs(otherWall.sizeX)), 1));
         this.score++;
         this.changeDomScore(this.score);
         this.convWallsLeft.splice(indexBottom, 1);

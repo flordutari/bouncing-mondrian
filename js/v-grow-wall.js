@@ -54,8 +54,8 @@ class VGrowingWall{
     };
 
     checkOtherWallsVLT(wall){
-        const bottom = this.y + this.sizeY < wall.y + wall.sizeY;
-        const top = this.y + this.sizeY < wall.y;
+        const bottom = this.y + this.sizeY > wall.y;
+        const top = this.y + this.sizeY < wall.y + wall.sizeY;
         const left = this.x > wall.x + wall.sizeX;
         const right = this.x + this.sizeX < wall.x;
         if(top && bottom && left && right){
@@ -64,8 +64,8 @@ class VGrowingWall{
     };
 
     checkOtherWallsVRT(wall){
-        const bottom = this.y + this.sizeY < wall.y + wall.sizeY;
-        const top = this.y + this.sizeY < wall.y;
+        const bottom = this.y + this.sizeY > wall.y;
+        const top = this.y + this.sizeY < wall.y + wall.sizeY;
         const left = this.x > wall.x;
         const right = this.x + this.sizeX < wall.x + wall.sizeX;
 
