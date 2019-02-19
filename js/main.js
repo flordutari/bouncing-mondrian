@@ -24,11 +24,10 @@ const main = () => {
             <section class="game-screen">
                 <canvas></canvas>
                 <p class="lives">Lives : 5 </p>
-                <p class="levels">Level : 1 </p>
             </section>           
         `);
 
-        setInterval(buildGameOver, 500000000);
+        // <p class="levels">Level : 1 </p>
 
         const width = document.querySelector('.game-screen').offsetWidth;
         const height = document.querySelector('.game-screen').offsetHeight;
@@ -41,10 +40,8 @@ const main = () => {
         const pLives = document.querySelector('.lives')
         const changeLives = (lives) => {
             pLives.innerText = `Lives: ${lives}`
-        }
-
-       
-
+        };
+        
         const game = new Game(canvasElement);
         game.gameOverCallback(buildGameOver);
         game.onLivesChange(changeLives);
@@ -53,9 +50,9 @@ const main = () => {
             if(event.code === 'ShiftLeft'){
                 console.log(game.direction)
                 return game.direction = !game.direction
-
               };
-        })
+        });
+
         game.startLoop();
 
     };

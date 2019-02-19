@@ -9,8 +9,6 @@ class Ball {
         this.y = y;
         this.dx = 2;
         this.dy = 2;
-        this.ball = new Image();
-        this.ball.src = "../img/cbddm-g7la2.svg"
     };
     
     update(){
@@ -19,18 +17,12 @@ class Ball {
     };
 
     draw(){
-
         this.ctx.fillStyle = '#ffa500';
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false);
         this.ctx.strokeStyle = '#ffe100';
         this.ctx.fill();
         this.ctx.stroke();
-        // let img = new Image();
-        //     img.onload = function() {
-        //     context.drawImage(img, 20, 20);
-        //     };
-        //     img.src = '../img/cbddm-g7la2.svg';
 
         if(this.x > innerWidth || this.x < 0){
             this.dx = -this.dx;
@@ -156,10 +148,9 @@ class Ball {
             this.dy = -this.dy;
         };
     };
-
-
+    
     checkGrowWallV(wall){
-        if(wall.dy === 1) {
+        if(wall.dy === 2) {
             const bottom = this.y - this.radius < (wall.y + wall.sizeY);
             const top = this.y + this.radius > wall.y;
             const right = this.x - this.radius < (wall.x + wall.sizeX);
@@ -172,7 +163,7 @@ class Ball {
             };
         };
 
-        if(wall.dy === -1) {
+        if(wall.dy === -2) {
             const bottom = this.y - this.radius > (wall.y + wall.sizeY);
             const top = this.y + this.radius < wall.y;
             const right = this.x - this.radius < (wall.x + wall.sizeX);
@@ -187,7 +178,7 @@ class Ball {
     };
 
     checkGrowWallH(wall){
-        if(wall.dx === 1) {
+        if(wall.dx === 2) {
             const bottom = this.y - this.radius < (wall.y + wall.sizeY);
             const top = this.y + this.radius > wall.y;
             const right = this.x - this.radius < (wall.x + wall.sizeX);
@@ -200,7 +191,7 @@ class Ball {
             };
         };
 
-        if(wall.dx === -1) {
+        if(wall.dx === -2) {
             const bottom = this.y - this.radius < (wall.y + wall.sizeY);
             const top = this.y + this.radius > wall.y;
             const right = this.x - this.radius < wall.x;
