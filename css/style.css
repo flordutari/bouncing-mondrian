@@ -153,6 +153,12 @@ p {
   text-transform: uppercase;
 }
 
+.instruction {
+  text-transform: none;
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
 canvas {
     display: flex;
     background-color: rgb(221, 221, 221);

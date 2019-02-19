@@ -24,6 +24,7 @@ const main = () => {
             <section class="game-screen">
                 <canvas></canvas>
                 <p class="lives">Lives : 5 </p>
+                <p class="instruction">Press Shift to toggle direction</p>
             </section>           
         `);
 
@@ -47,7 +48,7 @@ const main = () => {
         game.onLivesChange(changeLives);
         
         document.addEventListener('keyup', event => {
-            if(event.code === 'ShiftLeft'){
+            if(event.code === 'ShiftLeft' || event.code === 'ShiftRight'){
                 console.log(game.direction)
                 return game.direction = !game.direction
               };
