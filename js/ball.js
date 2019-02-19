@@ -7,8 +7,8 @@ class Ball {
         this.ctx = this.canvas.getContext('2d');
         this.x = x;
         this.y = y;
-        this.dx = 2;
-        this.dy = 2;
+        this.dx = 3;
+        this.dy = 3;
     };
     
     update(){
@@ -55,10 +55,10 @@ class Ball {
         
         const collision = top && bottom && right && left; 
 
-        const x1 = this.x - this.radius + 4 < wall.x + wall.sizeX;
-        const y1 = this.y - this.radius + 4 < wall.y + wall.sizeY;
-        const x2 = this.x + this.radius - 4 > wall.x;
-        const y2 = this.y + this.radius - 4 > wall.y;
+        const x1 = this.x - this.radius + 6 < wall.x + wall.sizeX;
+        const y1 = this.y - this.radius + 6 < wall.y + wall.sizeY;
+        const x2 = this.x + this.radius - 6 > wall.x;
+        const y2 = this.y + this.radius - 6 > wall.y;
 
         if(collision && x1){
             this.dx = -this.dx;
@@ -89,10 +89,10 @@ class Ball {
         
         const collision = top && bottom && right && left; 
 
-        const x1 = this.x - this.radius + 4 < wall.x + wall.sizeX;
-        const y1 = this.y - this.radius + 4 < wall.y;
-        const x2 = this.x + this.radius - 4 > wall.x;
-        const y2 = this.y + this.radius - 4 > wall.y - Math.abs(wall.sizeY);
+        const x1 = this.x - this.radius + 6 < wall.x + wall.sizeX;
+        const y1 = this.y - this.radius + 6 < wall.y;
+        const x2 = this.x + this.radius - 6 > wall.x;
+        const y2 = this.y + this.radius - 6 > wall.y - Math.abs(wall.sizeY);
 
         if(collision && x1){
             this.dx = -this.dx;
@@ -123,10 +123,10 @@ class Ball {
         
         const collision = top && bottom && right && left; 
 
-        const x1 = this.x - this.radius + 4 < wall.x;
-        const y1 = this.y - this.radius + 4 < wall.y + wall.sizeY;
-        const x2 = this.x + this.radius - 4 > wall.x - Math.abs(wall.sizeX);
-        const y2 = this.y + this.radius - 4 > wall.y;
+        const x1 = this.x - this.radius + 6 < wall.x;
+        const y1 = this.y - this.radius + 6 < wall.y + wall.sizeY;
+        const x2 = this.x + this.radius - 6 > wall.x - Math.abs(wall.sizeX);
+        const y2 = this.y + this.radius - 6 > wall.y;
 
         if(collision && x1){
             this.dx = -this.dx;

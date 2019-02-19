@@ -16,12 +16,12 @@ class VGrowingWall{
     update(){
         if(this.dy === 2){
             if(this.convertWallBottom === false){
-                this.sizeY++;
+                this.sizeY = this.sizeY + 4;
             };
         };
         if(this.dy === -2){
             if(this.convertWallTop === false){
-                this.sizeY--;
+                this.sizeY = this.sizeY - 4;
             };
         };
         this.checkScreen();

@@ -18,8 +18,9 @@ class Game {
     this.unitedWallsH = [];
     this.isGameOver = false;
     this.module = 20;
-    this.direction = true;
+    this.direction = false;
     this.lives = 5;
+    this.score = 0;
   }
 
   startLoop() {
@@ -134,6 +135,11 @@ class Game {
         wall.drawFixed();
         });
     }
+    if(this.unitedWallsH) {
+      this.unitedWallsH.forEach(wall => {
+        wall.drawFixed();
+        });
+    }
     this.walls.forEach(wall => {
       wall.draw();
     });
@@ -145,8 +151,25 @@ class Game {
         if(otherWall.x === wall.x){
           let equis = wall.x;
         this.unitedWallsV.push(new VGrowingWall(this.canvas, equis, 0, this.canvas.height, -1));
+        this.score++;
+        this.changeDomScore(this.score);
         this.convWallsBottom.splice(indexBottom, 1);
         this.convWallsTop.splice(indexTop, 1);
+        };
+      });
+    });
+  };
+
+  checkIfTwoWallsH(){
+    this.convWallsRight.forEach((wall, indexTop) => {
+      this.convWallsLeft.find((otherWall, indexBottom) => {
+        if(otherWall.y === wall.y){
+          let ies = wall.y;
+        this.unitedWallsH.push(new HGrowingWall(this.canvas, 0, ies, this.canvas.width, 1));
+        this.score++;
+        this.changeDomScore(this.score);
+        this.convWallsLeft.splice(indexBottom, 1);
+        this.convWallsRight.splice(indexTop, 1);
         };
       });
     });
@@ -162,8 +185,7 @@ class Game {
         if (this.ball.checkGrowWallV(growWall) === true) {
           this.growWallTop.pop(growWall);
           this.lives--;
-          this.changeDomLives(this.lives)
-          console.log(this.lives);
+          this.changeDomLives(this.lives);
         }
         if(growWall.convertWallTop === true){
           this.convWallsTop.push(growWall);
@@ -191,8 +213,7 @@ class Game {
         if (this.ball.checkGrowWallV(growWall) === true) {
           this.growWallBottom.pop(growWall);
           this.lives--;
-          this.changeDomLives(this.lives)
-          console.log(this.lives);
+          this.changeDomLives(this.lives);
         }
         if(growWall.convertWallBottom === true){
           this.convWallsBottom.push(growWall);
@@ -220,8 +241,7 @@ class Game {
         if (this.ball.checkGrowWallH(growWall) === true){
           this.growWallLeft.pop(growWall);
           this.lives--;
-          this.changeDomLives(this.lives)
-          console.log(this.lives);
+          this.changeDomLives(this.lives);
         }
         if(growWall.convertWallLeft === true){
           this.convWallsLeft.push(growWall);
@@ -249,8 +269,7 @@ class Game {
         if (this.ball.checkGrowWallH(growWall) === true){
           this.growWallRight.pop(growWall);
           this.lives--;
-          this.changeDomLives(this.lives)
-          console.log(this.lives);
+          this.changeDomLives(this.lives);
         }
         if(growWall.convertWallRight === true){
           this.convWallsRight.push(growWall);
@@ -302,8 +321,10 @@ class Game {
       this.onGameOver();
     };
 
+  this.checkIfTwoWallsH();
   this.checkIfTwoWalls();
   };
+  
 
   gameOverCallback(callback) {
     this.onGameOver = callback;
@@ -311,5 +332,13 @@ class Game {
 
   onLivesChange(callback) {
     this.changeDomLives = callback;
+  };
+
+  onScoreChange(callback) {
+    this.changeDomScore = callback;
   }
 };
+
+
+// this.score++;
+// this.changeDomScore(this.score);

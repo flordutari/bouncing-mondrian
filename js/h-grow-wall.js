@@ -16,12 +16,12 @@ class HGrowingWall{
     update(){
         if(this.dx === 2){
             if (this.convertWallRight === false){
-                this.sizeX = this.sizeX + 2;
+                this.sizeX = this.sizeX + 4;
             };
         };
         if(this.dx === -2){
             if(this.convertWallLeft === false){
-                this.sizeX = this.sizeX - 2;
+                this.sizeX = this.sizeX - 4;
             };
         };
         this.checkScreen();

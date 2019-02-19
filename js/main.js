@@ -19,11 +19,12 @@ const main = () => {
 
     };
 
-    const buildGameScreen = (lives, level) => {
+    const buildGameScreen = (lives, score) => {
         const gameScreen = buildDom(`
             <section class="game-screen">
-                <canvas></canvas>
+                <canvas class="jscv direction"></canvas>
                 <p class="lives">Lives : 5 </p>
+                <p class="score">Score : 0</p>
                 <p class="instruction">Press Shift to toggle direction</p>
             </section>           
         `);
@@ -38,19 +39,29 @@ const main = () => {
         canvasElement.setAttribute('width', width);
         canvasElement.setAttribute('height', height);
 
-        const pLives = document.querySelector('.lives')
+        const pLives = document.querySelector('.lives');
         const changeLives = (lives) => {
-            pLives.innerText = `Lives: ${lives}`
+            pLives.innerText = `Lives : ${lives}`
+        };
+
+        const pScore = document.querySelector('.score');
+        const changeScore = (score) => {
+            pScore.innerText = `Score : ${score}`
         };
         
         const game = new Game(canvasElement);
         game.gameOverCallback(buildGameOver);
         game.onLivesChange(changeLives);
+        game.onScoreChange(changeScore);
         
         document.addEventListener('keyup', event => {
-            if(event.code === 'ShiftLeft' || event.code === 'ShiftRight'){
-                console.log(game.direction)
-                return game.direction = !game.direction
+            if(event.code === 'ShiftLeft' || event.code === 'ShiftRight'){                
+                game.direction = !game.direction;
+                if (game.direction === true){
+                canvasElement.className = "old-class";
+                } else if (game.direction === false){
+                canvasElement.className = "direction"; 
+                }
               };
         });
 
