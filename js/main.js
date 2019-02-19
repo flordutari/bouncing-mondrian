@@ -19,12 +19,12 @@ const main = () => {
 
     };
 
-    const buildGameScreen = () => {
+    const buildGameScreen = (lives, level) => {
         const gameScreen = buildDom(`
             <section class="game-screen">
                 <canvas></canvas>
-                <p>Lives : ${this.lives} </p>
-                <p>Level : ${this.level} </p>
+                <p class="lives">Lives : 5 </p>
+                <p class="levels">Level : 1 </p>
             </section>           
         `);
 
@@ -38,9 +38,24 @@ const main = () => {
         canvasElement.setAttribute('width', width);
         canvasElement.setAttribute('height', height);
 
+        const pLives = document.querySelector('.lives')
+        const changeLives = (lives) => {
+            pLives.innerText = `Lives: ${lives}`
+        }
+
+       
+
         const game = new Game(canvasElement);
         game.gameOverCallback(buildGameOver);
+        game.onLivesChange(changeLives);
         
+        document.addEventListener('keyup', event => {
+            if(event.code === 'ShiftLeft'){
+                console.log(game.direction)
+                return game.direction = !game.direction
+
+              };
+        })
         game.startLoop();
 
     };

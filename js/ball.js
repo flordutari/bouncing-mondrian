@@ -9,6 +9,8 @@ class Ball {
         this.y = y;
         this.dx = 2;
         this.dy = 2;
+        this.ball = new Image();
+        this.ball.src = "../img/cbddm-g7la2.svg"
     };
     
     update(){
@@ -17,12 +19,11 @@ class Ball {
     };
 
     draw(){
-        this.ctx.clearRect(0, 0, innerWidth, innerHeight);
 
-        this.ctx.fillStyle = 'rgb(199, 92, 21)';
+        this.ctx.fillStyle = '#ffa500';
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false);
-        this.ctx.strokeStyle = 'rgb(199, 92, 21)';
+        this.ctx.strokeStyle = '#ffe100';
         this.ctx.fill();
         this.ctx.stroke();
         // let img = new Image();

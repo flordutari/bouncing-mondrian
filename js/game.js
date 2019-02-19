@@ -19,17 +19,18 @@ class Game {
     this.checkSpace;
     this.isGameOver = false;
     this.module = 20;
-    this.direction = 1;
+    this.direction = true;
     this.lives = 5;
   }
 
   startLoop() {
     this.balls.push(new Ball(this.canvas, 200, 200));
+    console.log(this.balls)
     this.walls.push(new Wall(this.canvas, this.canvas.width, this.module, 0, 0));
     this.walls.push(new Wall(this.canvas, this.module, this.canvas.height - this.module * 2, this.canvas.width - this.module, this.module));
     this.walls.push(new Wall(this.canvas, this.canvas.width, this.module, 0, this.canvas.height - this.module));
-    this.walls.push(new Wall(this.canvas, this.module, this.canvas.height - this.module * 2, 0, this.module));
-    
+    this.walls.push(new Wall(this.canvas, this.module, this.canvas.height - this.module * 2, 0, this.module));  
+
     let x;
     let y;
     this.canvas.addEventListener("click", event => {
@@ -38,10 +39,10 @@ class Game {
       x -= this.canvas.offsetLeft;
       y -= this.canvas.offsetTop;
 
-      if(this.growWallBottom.length === 0 && this.growWallTop.length === 0 && this.direction === 1){
+      if(this.growWallBottom.length === 0 && this.growWallTop.length === 0 && this.direction === true){
         this.growWallBottom.push(new VGrowingWall(this.canvas, x, y, 20, 1));
         this.growWallTop.push(new VGrowingWall(this.canvas, x, y, -20, -1));};
-      if(this.growWallRight.length === 0 && this.growWallLeft.length === 0 && this.direction === -1){
+      if(this.growWallRight.length === 0 && this.growWallLeft.length === 0 && this.direction === false){
         this.growWallRight.push(new HGrowingWall(this.canvas, x, y, 20, 1));
         this.growWallLeft.push(new HGrowingWall(this.canvas, x, y, -20, -1));};
     });
@@ -57,14 +58,6 @@ class Game {
     };
     window.requestAnimationFrame(loop);
   };
-
-  toggleDirection(){
-    this.canvas.addEventListener("onKeyPress", event => {
-      if(event.keycode === 'ShiftLeft'){
-        return this.direction * - 1
-      };
-    });  
-  }
 
   updateCanvas() {
     this.balls.forEach(ball => {
@@ -176,6 +169,7 @@ class Game {
         if (ball.checkGrowWallV(growWall) === true) {
           this.growWallTop.pop(growWall);
           this.lives--;
+          this.changeDomLives(this.lives)
           console.log(this.lives);
         }
         if(growWall.convertWallTop === true){
@@ -191,6 +185,7 @@ class Game {
         if (ball.checkGrowWallV(growWall) === true) {
           this.growWallBottom.pop(growWall);
           this.lives--;
+          this.changeDomLives(this.lives)
           console.log(this.lives);
         }
         if(growWall.convertWallBottom === true){
@@ -206,6 +201,7 @@ class Game {
         if (ball.checkGrowWallH(growWall) === true){
           this.growWallLeft.pop(growWall);
           this.lives--;
+          this.changeDomLives(this.lives)
           console.log(this.lives);
         }
         if(growWall.convertWallLeft === true){
@@ -221,6 +217,7 @@ class Game {
         if (ball.checkGrowWallH(growWall) === true){
           this.growWallRight.pop(growWall);
           this.lives--;
+          this.changeDomLives(this.lives)
           console.log(this.lives);
         }
         if(growWall.convertWallRight === true){
@@ -277,4 +274,8 @@ class Game {
   gameOverCallback(callback) {
     this.onGameOver = callback;
   };
+
+  onLivesChange(callback) {
+    this.changeDomLives = callback;
+  }
 };
