@@ -13,10 +13,10 @@ body {
   color: rgb(221, 221, 221);
   margin: 0;
   padding: 0;
-  background-image: url("../img/fire.png");
+  background-image: url("../img/mondrian.png");
   background-size: cover;
-  width: 100%;
-  height: 100vh;
+  width: 1440;
+  height: 900;
   display: flex;
 }
 
@@ -64,9 +64,8 @@ body .game-over {
   flex-direction: column;
   justify-content: center;
   background-image: url("../img/game-over-back.png");
-  background-size: cover;
   width: 100%;
-  height: 1000px;
+  height: 100vh;
 }
 
 h2 {
@@ -95,8 +94,8 @@ h2 {
 }
 
 .game-screen {
-  margin-top: 200px;
-  margin-left: 25%;
+  margin-top: 180px;
+  margin-left: 300px;
   width: 840px;
   height: 440px;
   font-family: 'Montserrat', sans-serif;
@@ -120,11 +119,11 @@ canvas.old-class {
   background-color: rgb(248, 248, 248);
   justify-content:center;
   align-items:center;
-  cursor: url('../img/chorro-agua-V.png'), auto;
+  cursor: ns-resize;
 }
 
 canvas.direction {
-  cursor: url('../img/chorro-agua-H.png'), auto;
+  cursor: ew-resize;
   display: flex;
   background-color: rgb(248, 248, 248);
   justify-content:center;

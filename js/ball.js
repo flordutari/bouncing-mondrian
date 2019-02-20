@@ -18,10 +18,10 @@ class Ball {
     };
 
     draw(){
-        this.ctx.fillStyle = '#ffa500';
+        this.ctx.fillStyle = '#222222';
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false);
-        this.ctx.strokeStyle = '#ffe100';
+        this.ctx.strokeStyle = '#222222';
         this.ctx.fill();
         this.ctx.stroke();
 
