@@ -25,7 +25,8 @@ const main = () => {
                 <canvas class="jscv direction"></canvas>
                 <p class="lives">Lives : 3</p>
                 <p class="score">Score : 0</p>
-                <p class="instruction">Press Shift to toggle direction</p>
+                <div id="countdown"></div>
+                <p class="instruction">Press the Spacebar to toggle direction</p>
             </section>           
         `);
 
@@ -55,7 +56,7 @@ const main = () => {
         game.onScoreChange(changeScore);
         
         document.addEventListener('keyup', event => {
-            if(event.code === 'ShiftLeft' || event.code === 'ShiftRight'){                
+            if(event.code === 'Space'){                
                 game.direction = !game.direction;
                 if (game.direction === true){
                 canvasElement.className = "old-class";
@@ -64,6 +65,10 @@ const main = () => {
                 }
               };
         });
+
+        document.getElementById("countdown").innerText ="0:30";
+        
+        game.counter();
 
         game.startLoop();
 
@@ -74,6 +79,7 @@ const main = () => {
             <section class="game-over">
                 <h2>Game Over</h2>
                 <button>Restart</button>
+                <p class="score">Score : 0</p>
             </section>
         `);
 

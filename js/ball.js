@@ -9,6 +9,7 @@ class Ball {
         this.y = y;
         this.dx = 3;
         this.dy = 3;
+        this.score = 0;
     };
     
     update(){
@@ -38,12 +39,16 @@ class Ball {
     checkCollisionScreen(){
         if(this.y - this.radius < 0){
             this.dy = this.dy;
+            this.countScore();
         } else if (this.y + this.radius > this.canvas.height){
             this.dy = -this.dy;
+            this.countScore();
         } else if (this.x - this.radius < 0){
             this.dx = this.dx;
+            this.countScore();
         } else if (this.x + this.radius > this.canvas.width){
             this.dx = -this.dx;
+            this.countScore();
         };
     };
 
@@ -63,21 +68,25 @@ class Ball {
         if(collision && x1){
             this.dx = -this.dx;
             this.dy = this.dy;
+            this.changeScore();
         };
 
         if(collision && y1){
             this.dx = this.dx;
             this.dy = -this.dy;
+            this.changeScore();
         };
 
         if(collision && x2){
             this.dx = -this.dx;
             this.dy = this.dy;
+            this.changeScore();
         };
 
         if(collision && y2){
             this.dx = this.dx;
             this.dy = -this.dy;
+            this.changeScore();
         };
     };
 
@@ -97,21 +106,25 @@ class Ball {
         if(collision && x1){
             this.dx = -this.dx;
             this.dy = this.dy;
+            this.changeScore();
         };
 
         if(collision && y1){
             this.dx = this.dx;
             this.dy = -this.dy;
+            this.changeScore();
         };
 
         if(collision && x2){
             this.dx = -this.dx;
             this.dy = this.dy;
+            this.changeScore();
         };
 
         if(collision && y2){
             this.dx = this.dx;
             this.dy = -this.dy;
+            this.changeScore();
         };
     };
 
@@ -131,21 +144,25 @@ class Ball {
         if(collision && x1){
             this.dx = -this.dx;
             this.dy = this.dy;
+            this.changeScore();
         };
 
         if(collision && y1){
             this.dx = this.dx;
             this.dy = -this.dy;
+            this.changeScore();
         };
 
         if(collision && x2){
             this.dx = -this.dx;
             this.dy = this.dy;
+            this.changeScore();
         };
 
         if(collision && y2){
             this.dx = this.dx;
             this.dy = -this.dy;
+            this.changeScore();
         };
     };
     
@@ -204,5 +221,9 @@ class Ball {
             };
         };
     };
+
+  changeScore(){
+      this.score++;
+  };
 };
     

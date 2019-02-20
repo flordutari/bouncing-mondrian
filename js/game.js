@@ -20,7 +20,25 @@ class Game {
     this.module = 20;
     this.direction = false;
     this.lives = 3;
-    this.score = 0;
+    this.seconds = 30;
+  }
+
+  counter() {
+    const secondPassed = () => {
+      let minutes = 0;
+      let remainingSeconds = this.seconds % 60;
+      if (remainingSeconds < 10) {
+        remainingSeconds = "0" + remainingSeconds;
+      }
+      document.getElementById("countdown").innerText =
+        minutes + ":" + remainingSeconds;
+      if (this.seconds == 0) {
+        clearInterval(countdownTimer);
+      } else {
+        this.seconds--;
+      }
+    }
+    let countdownTimer = setInterval(secondPassed, 1000);
   }
 
   startLoop() {
@@ -51,6 +69,7 @@ class Game {
       this.updateCanvas();
       this.clearCanvas();
       this.drawCanvas();
+      this.changeDomScore(this.ball.score);
       if (!this.isGameOver) {
         window.requestAnimationFrame(loop);
       }
@@ -146,14 +165,12 @@ class Game {
   }
 
   checkIfTwoWalls(){
-    this.convWallsTop.forEach((wall, indexTop) => {
-      this.convWallsBottom.find((otherWall, indexBottom) => {
+    this.convWallsBottom.forEach((wall, indexBottom) => {
+      this.convWallsTop.find((otherWall, indexTop) => {
         if(otherWall.x === wall.x){
           let equis = wall.x;
           let ies = wall.y - Math.abs(otherWall.sizeY);
-        this.unitedWallsV.push(new VGrowingWall(this.canvas, equis, ies, (Math.abs(wall.sizeY) + Math.abs(otherWall.sizeY)-20), -1));
-        this.score++;
-        this.changeDomScore(this.score);
+        this.unitedWallsV.push(new VGrowingWall(this.canvas, equis, ies, (Math.abs(wall.sizeY) + Math.abs(otherWall.sizeY)), -1));
         this.convWallsBottom.splice(indexBottom, 1);
         this.convWallsTop.splice(indexTop, 1);
         };
@@ -162,21 +179,19 @@ class Game {
   };
 
   checkIfTwoWallsH(){
-    this.convWallsRight.forEach((wall, indexTop) => {
-      this.convWallsLeft.find((otherWall, indexBottom) => {
+    this.convWallsRight.forEach((wall, indexRight) => {
+      this.convWallsLeft.find((otherWall, indexLeft) => {
         if(otherWall.y === wall.y){
           let ies = wall.y;
           let equis = wall.x - Math.abs(otherWall.sizeX);
         this.unitedWallsH.push(new HGrowingWall(this.canvas, equis, ies, (Math.abs(wall.sizeX) + Math.abs(otherWall.sizeX)), 1));
-        this.score++;
-        this.changeDomScore(this.score);
-        this.convWallsLeft.splice(indexBottom, 1);
-        this.convWallsRight.splice(indexTop, 1);
+        this.convWallsLeft.splice(indexLeft, 1);
+        this.convWallsRight.splice(indexRight, 1);
         };
       });
     });
   };
-  
+
   checkAllCollisions() {
     this.walls.forEach(wall => {
       this.ball.checkCollisionWalls(wall);
@@ -318,7 +333,7 @@ class Game {
       this.ball.checkCollisionWalls(wall);
     });
 
-    if(this.lives === 0){
+    if(this.lives === 0 || this.seconds === 0){
       this.isGameOver = true;
       this.onGameOver();
     };
@@ -326,8 +341,11 @@ class Game {
   this.checkIfTwoWallsH();
   this.checkIfTwoWalls();
   };
-  
 
+  onScoreChange(callback) {
+    this.changeDomScore = callback;
+  };
+  
   gameOverCallback(callback) {
     this.onGameOver = callback;
   };
@@ -335,10 +353,6 @@ class Game {
   onLivesChange(callback) {
     this.changeDomLives = callback;
   };
-
-  onScoreChange(callback) {
-    this.changeDomScore = callback;
-  }
 };
 
 

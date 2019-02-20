@@ -68,7 +68,6 @@ class VGrowingWall{
         const top = this.y + this.sizeY < wall.y + wall.sizeY;
         const left = this.x > wall.x;
         const right = this.x + this.sizeX < wall.x + wall.sizeX;
-
         if(top && bottom && left && right){
             this.convertWallTop= true;
         };
@@ -89,7 +88,6 @@ class VGrowingWall{
         const top = this.y + this.sizeY > wall.y;
         const left = this.x > wall.x;
         const right = this.x + this.sizeX < wall.x + wall.sizeY;
-
         if(top && bottom && left && right){
             this.convertWallBottom = true;
         };
@@ -102,7 +100,7 @@ class VGrowingWall{
         const right = this.x + this.sizeX < wall.x + wall.sizeX;
 
         if(top && bottom && left && right){
-            this.convertWalTop = true;
+            this.convertWallTop = true;
             this.convertWallBottom = true;
         };
     };
