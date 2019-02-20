@@ -49,9 +49,11 @@ const main = () => {
         const changeScore = (score) => {
             pScore.innerText = `Score : ${score}`
         };
-        
+
         const game = new Game(canvasElement);
-        game.gameOverCallback(buildGameOver);
+        game.gameOverCallback((score) => {
+            buildGameOver(score);
+        });
         game.onLivesChange(changeLives);
         game.onScoreChange(changeScore);
         
@@ -74,20 +76,52 @@ const main = () => {
 
     };
 
-    const buildGameOver = () => {
+    const buildGameOver = (score) => {
         const gameOverScreen = buildDom(`
             <section class="game-over">
                 <h2>Game Over</h2>
                 <button>Restart</button>
-                <p class="score">Score : 0</p>
+                <p class="score final-score">Score : 0</p>
             </section>
         `);
 
         const restartButton = document.querySelector('button');
         restartButton.addEventListener('click', buildGameScreen);
+
+        const changeFinalScore = document.querySelector('.final-score');
+            changeFinalScore.innerHTML = "Your score was : " + score;
+        
+        game.onScoreChange(changeFinalScore);
     };
 
     buildSplashScreen();
 
 };
 window.addEventListener('load', main);
+
+// const updateScore = (score) => {
+//     scoreLabel.innerHTML = "  Your score :  " + score;
+//   }
+
+//   // -------  CREAMOS EL JUEGO  -------//
+
+//   const game = new Game(canvasElement,updateScore,playerLives);
+//   game.gameOverCallback( (score) => {
+//     buildGameOverScreen(score);
+//   });
+
+//   const buildGameOverScreen = (score)=> {  // -------  INICIO GAMEOVERSCREEN  -------
+//     const GameOverScreen = buildDom(`
+//     <section class="gameover-screen">
+//       <h1>Good job!!</h1>
+//       <h3 class="final-score">Your score was :</h3>
+//       <canvas class="background-gameover"></canvas>
+//       <div class="end-buttons">
+//         <button class="try-again">Try again!</button>
+//         <button class="restart">Restart</button>
+//       </div>
+//     </section>
+//     `);
+
+//     const Score = document.querySelector('.final-score');
+//     Score.innerHTML = "Your score is : " + score;
