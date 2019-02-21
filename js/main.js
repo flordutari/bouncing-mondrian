@@ -10,8 +10,8 @@ const main = () => {
     const buildSplashScreen = () => {
         const splashScreen = buildDom(`
         <section class="splash-screen">
-            <h1>Fire hazard</h1>
-            <button>Start</button>
+            <h1>Bouncing in a<br> Mondrian</h1>
+            <button id="start">Start</button>
         </section>
         `);
         const startButton = document.querySelector('button');
@@ -23,9 +23,18 @@ const main = () => {
         const gameScreen = buildDom(`
             <section class="game-screen">
                 <canvas class="jscv direction"></canvas>
-                <p class="lives">Lives : 3</p>
-                <p class="score">Score : 0</p>
-                <div id="countdown"></div>
+                <div class="lives-score">
+                    <p class="lives">Lives : 3</p>
+                    <p class="score">Score : 0</p>
+                    <div id="countdown"></div>
+                    <audio id="lost-live" controls>
+                        <source type="audio/wav" src="audio/lost-live.wav">
+                    </audio>
+                    <audio id="bounce" controls>
+                        <source type="audio/wav" src="audio/bounce2.wav">
+                    </audio>
+                </div>
+                
                 <p class="instruction">Press the Spacebar to toggle direction</p>
             </section>           
         `);
@@ -80,8 +89,8 @@ const main = () => {
         const gameOverScreen = buildDom(`
             <section class="game-over">
                 <h2>Game Over</h2>
-                <button>Restart</button>
-                <p class="score final-score">Score : 0</p>
+                <p class="final-score">Score : 0</p>
+                <button id="restart">Restart</button>
             </section>
         `);
 
@@ -89,7 +98,7 @@ const main = () => {
         restartButton.addEventListener('click', buildGameScreen);
 
         const changeFinalScore = document.querySelector('.final-score');
-            changeFinalScore.innerHTML = "Your score was : " + score;
+            changeFinalScore.innerHTML = "Your score : " + score;
         
         game.onScoreChange(changeFinalScore);
     };
@@ -98,30 +107,3 @@ const main = () => {
 
 };
 window.addEventListener('load', main);
-
-// const updateScore = (score) => {
-//     scoreLabel.innerHTML = "  Your score :  " + score;
-//   }
-
-//   // -------  CREAMOS EL JUEGO  -------//
-
-//   const game = new Game(canvasElement,updateScore,playerLives);
-//   game.gameOverCallback( (score) => {
-//     buildGameOverScreen(score);
-//   });
-
-//   const buildGameOverScreen = (score)=> {  // -------  INICIO GAMEOVERSCREEN  -------
-//     const GameOverScreen = buildDom(`
-//     <section class="gameover-screen">
-//       <h1>Good job!!</h1>
-//       <h3 class="final-score">Your score was :</h3>
-//       <canvas class="background-gameover"></canvas>
-//       <div class="end-buttons">
-//         <button class="try-again">Try again!</button>
-//         <button class="restart">Restart</button>
-//       </div>
-//     </section>
-//     `);
-
-//     const Score = document.querySelector('.final-score');
-//     Score.innerHTML = "Your score is : " + score;

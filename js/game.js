@@ -202,6 +202,8 @@ class Game {
         if (this.ball.checkGrowWallV(growWall) === true) {
           this.growWallTop.pop(growWall);
           this.lives--;
+          let audio = document.getElementById("bounce");
+            audio.play();
           this.changeDomLives(this.lives);
         }
         if(growWall.convertWallTop === true){
@@ -230,6 +232,8 @@ class Game {
         if (this.ball.checkGrowWallV(growWall) === true) {
           this.growWallBottom.pop(growWall);
           this.lives--;
+          let audio = document.getElementById("bounce");
+            audio.play();
           this.changeDomLives(this.lives);
         }
         if(growWall.convertWallBottom === true){
@@ -258,6 +262,8 @@ class Game {
         if (this.ball.checkGrowWallH(growWall) === true){
           this.growWallLeft.pop(growWall);
           this.lives--;
+          let audio = document.getElementById("bounce");
+            audio.play();
           this.changeDomLives(this.lives);
         }
         if(growWall.convertWallLeft === true){
@@ -286,6 +292,8 @@ class Game {
         if (this.ball.checkGrowWallH(growWall) === true){
           this.growWallRight.pop(growWall);
           this.lives--;
+          let audio = document.getElementById("bounce");
+            audio.play();
           this.changeDomLives(this.lives);
         }
         if(growWall.convertWallRight === true){
@@ -333,7 +341,7 @@ class Game {
       this.ball.checkCollisionWalls(wall);
     });
 
-    if(this.lives === 0 || this.seconds === 0){
+    if(this.lives <= 0 || this.seconds === 0){
       this.isGameOver = true;
       this.onGameOver();
     };

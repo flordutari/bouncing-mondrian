@@ -18,10 +18,10 @@ class Ball {
     };
 
     draw(){
-        this.ctx.fillStyle = '#222222';
+        this.ctx.fillStyle = '#1d4cb7';
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false);
-        this.ctx.strokeStyle = '#222222';
+        this.ctx.strokeStyle = '1d4cb7';
         this.ctx.fill();
         this.ctx.stroke();
 
@@ -69,24 +69,32 @@ class Ball {
             this.dx = -this.dx;
             this.dy = this.dy;
             this.changeScore();
+            let audio = document.getElementById("bounce");
+            audio.play();
         };
 
         if(collision && y1){
             this.dx = this.dx;
             this.dy = -this.dy;
             this.changeScore();
+            let audio = document.getElementById("bounce");
+            audio.play();
         };
 
         if(collision && x2){
             this.dx = -this.dx;
             this.dy = this.dy;
             this.changeScore();
+            let audio = document.getElementById("bounce");
+            audio.play();
         };
 
         if(collision && y2){
             this.dx = this.dx;
             this.dy = -this.dy;
             this.changeScore();
+            let audio = document.getElementById("bounce");
+            audio.play();
         };
     };
 
@@ -107,24 +115,32 @@ class Ball {
             this.dx = -this.dx;
             this.dy = this.dy;
             this.changeScore();
+            let audio = document.getElementById("bounce");
+            audio.play();
         };
 
         if(collision && y1){
             this.dx = this.dx;
             this.dy = -this.dy;
             this.changeScore();
+            let audio = document.getElementById("bounce");
+            audio.play();
         };
 
         if(collision && x2){
             this.dx = -this.dx;
             this.dy = this.dy;
             this.changeScore();
+            let audio = document.getElementById("bounce");
+            audio.play();
         };
 
         if(collision && y2){
             this.dx = this.dx;
             this.dy = -this.dy;
             this.changeScore();
+            let audio = document.getElementById("bounce");
+            audio.play();
         };
     };
 
@@ -145,24 +161,32 @@ class Ball {
             this.dx = -this.dx;
             this.dy = this.dy;
             this.changeScore();
+            let audio = document.getElementById("bounce");
+            audio.play();
         };
 
         if(collision && y1){
             this.dx = this.dx;
             this.dy = -this.dy;
             this.changeScore();
+            let audio = document.getElementById("bounce");
+            audio.play();
         };
 
         if(collision && x2){
             this.dx = -this.dx;
             this.dy = this.dy;
             this.changeScore();
+            let audio = document.getElementById("bounce");
+            audio.play();
         };
 
         if(collision && y2){
             this.dx = this.dx;
             this.dy = -this.dy;
             this.changeScore();
+            let audio = document.getElementById("bounce");
+            audio.play();
         };
     };
     

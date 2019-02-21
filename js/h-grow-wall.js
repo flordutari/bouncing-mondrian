@@ -29,12 +29,12 @@ class HGrowingWall{
 
     draw(){
         if(this.dx === 2){
-            this.ctx.fillStyle = "#999999";
+            this.ctx.fillStyle = "#cb3737";
             this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
         };
 
         if(this.dx === -2){  
-            this.ctx.fillStyle = "#aaaaaa";
+            this.ctx.fillStyle = "#e4b951";
             this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
         };
     };

@@ -29,12 +29,12 @@ class VGrowingWall{
 
     draw(){
         if(this.dy === 2){ 
-            this.ctx.fillStyle = "#78c6e8";
+            this.ctx.fillStyle = "#cb3737";
             this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
         };
 
         if(this.dy === -2){  
-            this.ctx.fillStyle = "#92b7ef";
+            this.ctx.fillStyle = "#e4b951";
             this.ctx.fillRect(this.x, this.y, this.sizeX, this.sizeY);
         };
     };
