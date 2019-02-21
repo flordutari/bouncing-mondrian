@@ -21,7 +21,7 @@ class Game {
     this.direction = false;
     this.lives = 3;
     this.seconds = 30;
-  }
+  };
 
   counter() {
     const secondPassed = () => {
@@ -39,7 +39,7 @@ class Game {
       }
     }
     let countdownTimer = setInterval(secondPassed, 1000);
-  }
+  };
 
   startLoop() {
     this.ball = new Ball(this.canvas, 200, 200);
@@ -104,7 +104,7 @@ class Game {
 
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-  }
+  };
 
   drawCanvas() {
     this.ball.draw();
@@ -162,7 +162,7 @@ class Game {
     this.walls.forEach(wall => {
       wall.draw();
     });
-  }
+  };
 
   checkIfTwoWalls(){
     this.convWallsBottom.forEach((wall, indexBottom) => {
@@ -202,7 +202,7 @@ class Game {
         if (this.ball.checkGrowWallV(growWall) === true) {
           this.growWallTop.pop(growWall);
           this.lives--;
-          let audio = document.getElementById("bounce");
+          let audio = document.getElementById("lost-live");
             audio.play();
           this.changeDomLives(this.lives);
         }
@@ -232,7 +232,7 @@ class Game {
         if (this.ball.checkGrowWallV(growWall) === true) {
           this.growWallBottom.pop(growWall);
           this.lives--;
-          let audio = document.getElementById("bounce");
+          let audio = document.getElementById("lost-live");
             audio.play();
           this.changeDomLives(this.lives);
         }
@@ -262,7 +262,7 @@ class Game {
         if (this.ball.checkGrowWallH(growWall) === true){
           this.growWallLeft.pop(growWall);
           this.lives--;
-          let audio = document.getElementById("bounce");
+          let audio = document.getElementById("lost-live");
             audio.play();
           this.changeDomLives(this.lives);
         }
@@ -292,7 +292,7 @@ class Game {
         if (this.ball.checkGrowWallH(growWall) === true){
           this.growWallRight.pop(growWall);
           this.lives--;
-          let audio = document.getElementById("bounce");
+          let audio = document.getElementById("lost-live");
             audio.play();
           this.changeDomLives(this.lives);
         }
@@ -343,7 +343,7 @@ class Game {
 
     if(this.lives <= 0 || this.seconds === 0){
       this.isGameOver = true;
-      this.onGameOver();
+      this.onGameOver(this.ball.score);
     };
 
   this.checkIfTwoWallsH();
@@ -362,7 +362,3 @@ class Game {
     this.changeDomLives = callback;
   };
 };
-
-
-// this.score++;
-// this.changeDomScore(this.score);

@@ -19,7 +19,7 @@ const main = () => {
 
     };
 
-    const buildGameScreen = (lives, score) => {
+    const buildGameScreen = () => {
         const gameScreen = buildDom(`
             <section class="game-screen">
                 <canvas class="jscv direction"></canvas>
@@ -89,7 +89,7 @@ const main = () => {
         const gameOverScreen = buildDom(`
             <section class="game-over">
                 <h2>Game Over</h2>
-                <p class="final-score">Score : 0</p>
+                <p class="final-score"></p>
                 <button id="restart">Restart</button>
             </section>
         `);

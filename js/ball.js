@@ -21,7 +21,7 @@ class Ball {
         this.ctx.fillStyle = '#1d4cb7';
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false);
-        this.ctx.strokeStyle = '1d4cb7';
+        this.ctx.strokeStyle = '#1d4cb7';
         this.ctx.fill();
         this.ctx.stroke();
 
