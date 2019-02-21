@@ -104,7 +104,7 @@ h2 {
   align-self: center;
 }
 
-#bounce, #lost-live {
+#bounce, #lost-live, #loop{
   display: none;
 }
 

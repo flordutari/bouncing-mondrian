@@ -23,12 +23,15 @@ const main = () => {
         const gameScreen = buildDom(`
             <section class="game-screen">
                 <canvas class="jscv direction"></canvas>
+                <audio id="loop" controls>
+                        <source type="audio/wav" src="audio/funky.wav"  allow="autoplay">
+                </audio>
                 <div class="lives-score">
                     <p class="lives">Lives : 3</p>
                     <p class="score">Score : 0</p>
                     <div id="countdown"></div>
                     <audio id="lost-live" controls>
-                        <source type="audio/wav" src="audio/lost-live.wav">
+                        <source type="audio/wav" src="audio/exp.wav">
                     </audio>
                     <audio id="bounce" controls>
                         <source type="audio/wav" src="audio/bounce2.wav">
