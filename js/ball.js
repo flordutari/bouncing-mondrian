@@ -65,11 +65,12 @@ class Ball {
         const x2 = this.x + this.radius - 6 > wall.x;
         const y2 = this.y + this.radius - 6 > wall.y;
 
+        const audio = document.getElementById("bounce");
+
         if(collision && x1){
             this.dx = -this.dx;
             this.dy = this.dy;
             this.changeScore();
-            let audio = document.getElementById("bounce");
             audio.play();
         };
 
@@ -77,7 +78,6 @@ class Ball {
             this.dx = this.dx;
             this.dy = -this.dy;
             this.changeScore();
-            let audio = document.getElementById("bounce");
             audio.play();
         };
 
@@ -85,7 +85,6 @@ class Ball {
             this.dx = -this.dx;
             this.dy = this.dy;
             this.changeScore();
-            let audio = document.getElementById("bounce");
             audio.play();
         };
 
@@ -93,7 +92,6 @@ class Ball {
             this.dx = this.dx;
             this.dy = -this.dy;
             this.changeScore();
-            let audio = document.getElementById("bounce");
             audio.play();
         };
     };
@@ -111,11 +109,12 @@ class Ball {
         const x2 = this.x + this.radius - 6 > wall.x;
         const y2 = this.y + this.radius - 6 > wall.y - Math.abs(wall.sizeY);
 
+        const audio = document.getElementById("bounce");
+
         if(collision && x1){
             this.dx = -this.dx;
             this.dy = this.dy;
             this.changeScore();
-            let audio = document.getElementById("bounce");
             audio.play();
         };
 
@@ -123,7 +122,6 @@ class Ball {
             this.dx = this.dx;
             this.dy = -this.dy;
             this.changeScore();
-            let audio = document.getElementById("bounce");
             audio.play();
         };
 
@@ -131,7 +129,6 @@ class Ball {
             this.dx = -this.dx;
             this.dy = this.dy;
             this.changeScore();
-            let audio = document.getElementById("bounce");
             audio.play();
         };
 
@@ -139,7 +136,6 @@ class Ball {
             this.dx = this.dx;
             this.dy = -this.dy;
             this.changeScore();
-            let audio = document.getElementById("bounce");
             audio.play();
         };
     };
@@ -157,11 +153,12 @@ class Ball {
         const x2 = this.x + this.radius - 6 > wall.x - Math.abs(wall.sizeX);
         const y2 = this.y + this.radius - 6 > wall.y;
 
+        const audio = document.getElementById("bounce");
+
         if(collision && x1){
             this.dx = -this.dx;
             this.dy = this.dy;
             this.changeScore();
-            let audio = document.getElementById("bounce");
             audio.play();
         };
 
@@ -169,7 +166,6 @@ class Ball {
             this.dx = this.dx;
             this.dy = -this.dy;
             this.changeScore();
-            let audio = document.getElementById("bounce");
             audio.play();
         };
 
@@ -177,7 +173,6 @@ class Ball {
             this.dx = -this.dx;
             this.dy = this.dy;
             this.changeScore();
-            let audio = document.getElementById("bounce");
             audio.play();
         };
 
@@ -185,7 +180,6 @@ class Ball {
             this.dx = this.dx;
             this.dy = -this.dy;
             this.changeScore();
-            let audio = document.getElementById("bounce");
             audio.play();
         };
     };

@@ -27,17 +27,16 @@ class Game {
     const secondPassed = () => {
       let minutes = 0;
       let remainingSeconds = this.seconds % 60;
+      const countdownEl = document.getElementById("countdown");
+    
       if (remainingSeconds < 10) {
         remainingSeconds = "0" + remainingSeconds;
       }
-      document.getElementById("countdown").innerText =
-        minutes + ":" + remainingSeconds;
-      if (this.seconds == 0) {
-        clearInterval(countdownTimer);
-      } else {
-        this.seconds--;
-      }
+
+      if (countdownEl) countdownEl.innerText = minutes + ":" + remainingSeconds;
+      this.seconds == 0 ? clearInterval(countdownTimer) : this.seconds--;
     }
+
     let countdownTimer = setInterval(secondPassed, 1000);
   };
 
@@ -80,26 +79,10 @@ class Game {
   updateCanvas() {
     this.ball.update();
 
-    if (this.growWallTop) {
-        this.growWallTop.forEach(growWall => {
-        growWall.update();
-        });
-    }
-    if (this.growWallBottom) {
-        this.growWallBottom.forEach(growWall => {
-        growWall.update();
-        });
-    }
-    if (this.growWallLeft) {
-        this.growWallLeft.forEach(growWall => {
-        growWall.update();
-        });
-    }
-    if (this.growWallRight) {
-        this.growWallRight.forEach(growWall => {
-        growWall.update();
-        });
-    }
+    this.growWallTop && this.growWallTop.forEach(growWall => { growWall.update(); });
+    this.growWallBottom && this.growWallBottom.forEach(growWall => { growWall.update(); });
+    this.growWallLeft && this.growWallLeft.forEach(growWall => { growWall.update(); });
+    this.growWallRight && this.growWallRight.forEach(growWall => { growWall.update(); });
   };
 
   clearCanvas() {
@@ -109,59 +92,19 @@ class Game {
   drawCanvas() {
     this.ball.draw();
     
-    if (this.growWallTop) {
-        this.growWallTop.forEach(growWall => {
-        growWall.draw();
-        });
-    }
-    if (this.growWallBottom) {
-        this.growWallBottom.forEach(growWall => {
-        growWall.draw();
-        });
-    }
-    if (this.growWallLeft) {
-        this.growWallLeft.forEach(growWall => {
-        growWall.draw();
-        });
-    }
-    if (this.growWallRight) {
-        this.growWallRight.forEach(growWall => {
-        growWall.draw();
-        });
-    }
-    if(this.convWallsTop) {
-        this.convWallsTop.forEach(wall => {
-        wall.drawFixed();
-        });
-    }
-    if(this.convWallsBottom) {
-        this.convWallsBottom.forEach(wall => {
-        wall.drawFixed();
-        });
-    }
-    if(this.convWallsLeft) {
-        this.convWallsLeft.forEach(wall => {
-        wall.drawFixed();
-        });
-    }
-    if(this.convWallsRight) {
-        this.convWallsRight.forEach(wall => {
-        wall.drawFixed();
-        });
-    }
-    if(this.unitedWallsV) {
-      this.unitedWallsV.forEach(wall => {
-        wall.drawFixed();
-        });
-    }
-    if(this.unitedWallsH) {
-      this.unitedWallsH.forEach(wall => {
-        wall.drawFixed();
-        });
-    }
-    this.walls.forEach(wall => {
-      wall.draw();
-    });
+    this.growWallTop && this.growWallTop.forEach(growWall => { growWall.draw(); });
+    this.growWallBottom && this.growWallBottom.forEach(growWall => { growWall.draw(); });
+    this.growWallLeft && this.growWallLeft.forEach(growWall => { growWall.draw(); });
+    this.growWallRight && this.growWallRight.forEach(growWall => { growWall.draw(); });
+
+    this.convWallsTop && this.convWallsTop.forEach(wall => { wall.drawFixed(); });
+    this.convWallsBottom && this.convWallsBottom.forEach(wall => { wall.drawFixed(); });
+    this.convWallsLeft && this.convWallsLeft.forEach(wall => { wall.drawFixed(); });
+    this.convWallsRight && this.convWallsRight.forEach(wall => { wall.drawFixed(); });
+    this.unitedWallsV && this.unitedWallsV.forEach(wall => { wall.drawFixed(); });
+    this.unitedWallsH && this.unitedWallsH.forEach(wall => { wall.drawFixed(); });
+
+    this.walls.forEach(wall => { wall.draw(); });
   };
 
   checkIfTwoWalls(){
@@ -197,13 +140,14 @@ class Game {
       this.ball.checkCollisionWalls(wall);
     });
 
+    const audio = document.getElementById("lost-live");
+
     this.growWallTop.forEach((growWall) => {
       this.ball.checkGrowWallV(this.growWallTop);
         if (this.ball.checkGrowWallV(growWall) === true) {
           this.growWallTop.pop(growWall);
           this.lives--;
-          let audio = document.getElementById("lost-live");
-            audio.play();
+          audio.play();
           this.changeDomLives(this.lives);
         }
         if(growWall.convertWallTop === true){
@@ -232,8 +176,7 @@ class Game {
         if (this.ball.checkGrowWallV(growWall) === true) {
           this.growWallBottom.pop(growWall);
           this.lives--;
-          let audio = document.getElementById("lost-live");
-            audio.play();
+          audio.play();
           this.changeDomLives(this.lives);
         }
         if(growWall.convertWallBottom === true){
@@ -262,8 +205,7 @@ class Game {
         if (this.ball.checkGrowWallH(growWall) === true){
           this.growWallLeft.pop(growWall);
           this.lives--;
-          let audio = document.getElementById("lost-live");
-            audio.play();
+          audio.play();
           this.changeDomLives(this.lives);
         }
         if(growWall.convertWallLeft === true){
@@ -292,8 +234,7 @@ class Game {
         if (this.ball.checkGrowWallH(growWall) === true){
           this.growWallRight.pop(growWall);
           this.lives--;
-          let audio = document.getElementById("lost-live");
-            audio.play();
+          audio.play();
           this.changeDomLives(this.lives);
         }
         if(growWall.convertWallRight === true){
