@@ -1,7 +1,7 @@
 ## Bouncing-mondrian
 
 ### What?
-My very first project, inspired in JezzBall, a Microsoft game.
+My very first project, is a tribute to JezzBall, an arcade game developed by Microsoft(1992).
 
 ### How?
 Made in JS, HTML and CSS.
